@@ -140,9 +140,47 @@ double AREA2;
 
   }
 
+/*Function that determines if three points is in or on a circle with a given radius*/
   public boolean pointsInCircle(Point a, Point b, Point c, double radius){
-    return true;  //TODO change to variable when function is ready
+    double lengthAB = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+    double lengthAC = Math.sqrt(Math.pow(a.x - c.x, 2) + Math.pow(a.y - c.y, 2));
+    double lengthBC = Math.sqrt(Math.pow(b.x - c.x, 2) + Math.pow(b.y - c.y, 2));
 
+    double diameter = radius*2;
+
+    //check if they form a straight line, they are collinear. Then the line must be shorter than diameter
+    double collinear = a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y);
+    if(collinear==0){
+      if(lengthAB+lengthBC<=diameter || lengthAC+lengthAB<=diameter || lengthBC+lengthAC<=diameter){
+        return true;
+      }
+    }
+    //if all the points are the same point, then they fit within the circle
+    if(lengthAB==0 && lengthAC==0 && lengthBC==0){
+      return true;
+    }
+    //check if some of the points are the same and the other line is less than the diameter
+    if(lengthAB==0 && lengthAC <= diameter){
+      return true;
+    }
+    if(lengthAC==0 && lengthAB <= diameter){
+      return true;
+    }
+    if(lengthBC==0 && lengthAB <= diameter){
+      return true;
+    }
+    //calculate the radius of the circum circle, if that radius is larger than radius then the points is not within the circle
+    double radiusCircumCircle =
+      (lengthAB*lengthAC*lengthBC)/
+      (Math.sqrt((lengthAB+lengthAC+lengthBC)*
+      (lengthAB+lengthAC-lengthBC)*
+      (lengthAC+lengthBC-lengthAB)*
+      (lengthBC+lengthAB-lengthAC)));
+
+    if(radiusCircumCircle <= radius){
+      return true;
+    }
+    return false;
   }
 
 
