@@ -23,6 +23,9 @@ public class ConditionTest{
 	testLic0ReturnTrue();
 	testLic0ReturnFalse();
 
+  // LIC1 tests
+	testLic1ReturnTrue();
+	testLic1ReturnFalse();
   }
 
   //--------------------Circle test---------------
@@ -171,5 +174,38 @@ public class ConditionTest{
 		}else{
 			System.out.println("testLic0ReturnFalse = true");
 		}
+  }
+  
+  //--------------LIC1-----------------
+	public void testLic1ReturnTrue(){
+		// all points can not be in or on circle
+		run.RADIUS1 = 2;
+		run.points = new Point[3];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(6, 6);
+		run.points[2]= new Point(-10, -10);
+
+		if(run.lic1()){
+			System.out.println("testLic1ReturnTrue = true");
+		}else{
+			System.out.println("testLic1ReturnTrue = false");
+		}
 	}
+
+	public void testLic1ReturnFalse(){
+		// all points will be in circle
+		run.RADIUS1 = 4;
+		run.points = new Point[3];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(1, 1);
+		run.points[2]= new Point(-1, -1);
+
+
+		if(run.lic1()){
+			System.out.println("testLic1ReturnFalse = false");
+		}else{
+			System.out.println("testLic1ReturnFalse = true");
+		}
+	}
+
 }

@@ -94,9 +94,21 @@ double AREA2;
 }
 
 
+  // There exists at least one set of three consecutive data points that cannot all 
+  // be contained within or on a circle of radius RADIUS1.
   public boolean lic1(){
-    return true; //TODO change to variable when function is ready
+    // not enough data points, just return false
+    if (points.length <= 2) {
+        return false;
+    }
 
+    for (int i = 0; i < points.length-2; i++) {
+        // if points cannot be contained within a circle of radius RADIUS1
+        if (pointsInCircle(points[i], points[i+1], points[i+2], RADIUS1) == false) {
+            return true;
+        }
+    }
+    return false;
   }
   public boolean lic2(){
     return true; //TODO change to variable when function is ready
