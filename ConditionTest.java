@@ -29,7 +29,11 @@ public class ConditionTest{
   
   // LIC2 tests
 	testLic2ReturnTrue();
-	testLic2ReturnFalse();
+  testLic2ReturnFalse();
+  
+  // LIC3 tests
+	testLic3ReturnTrue();
+	testLic3ReturnFalse();
   }
 
   //--------------------Circle test---------------
@@ -240,6 +244,37 @@ public class ConditionTest{
 			System.out.println("testLic2ReturnFalse = false");
 		}else{
 			System.out.println("testLic2ReturnFalse = true");
+		}
+  }
+  
+  	//--------------LIC3-----------------
+	public void testLic3ReturnTrue(){
+		// area will be 28, bigger than AREA1
+		run.AREA1 = 1;
+		run.points = new Point[3];
+		run.points[0]= new Point(-2, -2);
+		run.points[1]= new Point(4, 3);
+		run.points[2]= new Point(-6, 4);
+
+		if(run.lic2()){
+			System.out.println("testLic3ReturnTrue = true");
+		}else{
+			System.out.println("testLic3ReturnTrue = false");
+		}
+	}
+
+	public void testLic3ReturnFalse(){
+		// collinear should fail
+		run.AREA1 = 1;
+		run.points = new Point[3];
+		run.points[0]= new Point(1, 2);
+		run.points[1]= new Point(2, 3);
+		run.points[2]= new Point(5, 6);
+
+		if(run.lic2()){
+			System.out.println("testLic3ReturnFalse = false");
+		}else{
+			System.out.println("testLic3ReturnFalse = true");
 		}
 	}
 

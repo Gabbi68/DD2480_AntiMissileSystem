@@ -154,10 +154,44 @@ double AREA2;
   return false;
   }
 
+  // There exists at least one set of three consecutive data points that are 
+  // the vertices of a triangle with area greater than AREA1.
   public boolean lic3(){
-    return true; //TODO change to variable when function is ready
+    double triangle_area;
+    double ab;
+    double bc;
+    double ca;
+    double s;
 
+    for (int i = 0; i < points.length-2; i++) {
+        // if less than 3 points it's not possible to create a triangle
+        if (points.length <= 2) {
+            return false;
+        }
+        // check if three points create a line
+        // http://mathworld.wolfram.com/Collinear.html
+        if (((points[i].x * (points[i+1].y - points[i+2].y)) + (points[i+1].x * (points[i+2].y - points[i].y)) + (points[i+2].x * (points[i].y - points[i+1].y))) == 0) {
+            continue;
+        }
+        
+        // calculate line ab
+        ab = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
+        // calculate line bc
+        bc = Math.sqrt(Math.pow(points[i+1].x - points[i+2].x, 2) + Math.pow(points[i+1].y - points[i+2].y, 2));
+        // calculate line ca
+        ca = Math.sqrt(Math.pow(points[i].x - points[i+2].x, 2) + Math.pow(points[i].y - points[i+2].y, 2));
+        // Semiperimeter
+        s = (ab + bc + ca) / 2;
+        // https://en.wikipedia.org/wiki/Heron%27s_formula
+        triangle_area = Math.sqrt(s * (s-ab) * (s-bc) * (s-ca));
+
+        if (triangle_area > AREA1) {
+            return true;
+        }
+    }
+    return false;
   }
+
   public boolean lic4(){
     return true; //TODO change to variable when function is ready
 
