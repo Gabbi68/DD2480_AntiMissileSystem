@@ -19,6 +19,10 @@ public class ConditionTest{
     testInCirclePointTwoPointsTheSameReturnsTrue();
     testInCirclePointTwoPointsTheSameReturnsFalse();
 
+    // LIC0 tests
+	testLic0ReturnTrue();
+	testLic0ReturnFalse();
+
   }
 
   //--------------------Circle test---------------
@@ -139,4 +143,33 @@ public class ConditionTest{
       System.out.println("testInCirclePointTwoPointsTheSameReturnsFalse = true");
     }
   }
+
+  //--------------LIC0-----------------
+	public void testLic0ReturnTrue(){
+		// points will be more than 1 apart
+		run.LENGTH1 = 1;
+		run.points = new Point[2];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(5, 5);
+
+		if(run.lic0()){
+			System.out.println("testLic0ReturnTrue = true");
+		}else{
+			System.out.println("testLic0ReturnTrue = false");
+		}
+	}
+
+	public void testLic0ReturnFalse(){
+		// points will be less than 5 apart
+		run.LENGTH1 = 5;
+		run.points = new Point[2];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(1, 1);
+
+		if(run.lic0()){
+			System.out.println("testLic0ReturnFalse = false");
+		}else{
+			System.out.println("testLic0ReturnFalse = true");
+		}
+	}
 }

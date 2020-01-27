@@ -79,10 +79,21 @@ double AREA2;
 
   }
 
-  public boolean lic0(){
-    return true; //TODO change to variable when function is ready
+ // There exists at least one set of two consecutive data points that are a distance greater than the length, LENGTH1, apart
+ public boolean lic0(){
+  double dst;
 
+  for (int i = 0; i < points.length-1; i++) {
+      // distance formula
+      dst = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
+      if (dst > LENGTH1) {
+          return true;
+      }
   }
+  return false;
+}
+
+
   public boolean lic1(){
     return true; //TODO change to variable when function is ready
 
