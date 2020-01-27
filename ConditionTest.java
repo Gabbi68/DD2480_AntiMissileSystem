@@ -25,7 +25,11 @@ public class ConditionTest{
 
   // LIC1 tests
 	testLic1ReturnTrue();
-	testLic1ReturnFalse();
+  testLic1ReturnFalse();
+  
+  // LIC2 tests
+	testLic2ReturnTrue();
+	testLic2ReturnFalse();
   }
 
   //--------------------Circle test---------------
@@ -206,6 +210,38 @@ public class ConditionTest{
 		}else{
 			System.out.println("testLic1ReturnFalse = true");
 		}
+  }
+  
+  //--------------LIC2-----------------
+	public void testLic2ReturnTrue(){
+		// angle will be less than pi-0
+		run.EPSILON = 0;
+		run.points = new Point[3];
+		run.points[0]= new Point(-1, 1);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(1, 1);
+
+		if(run.lic2()){
+			System.out.println("testLic2ReturnTrue = true");
+		}else{
+			System.out.println("testLic2ReturnTrue = false");
+		}
 	}
+
+	public void testLic2ReturnFalse(){
+		// first point coincides with vertex, angle is undefined
+		run.EPSILON = 0;
+		run.points = new Point[3];
+		run.points[0]= new Point(1, 1);
+		run.points[1]= new Point(1, 1);
+		run.points[2]= new Point(3, 3);
+
+		if(run.lic2()){
+			System.out.println("testLic2ReturnFalse = false");
+		}else{
+			System.out.println("testLic2ReturnFalse = true");
+		}
+	}
+
 
 }

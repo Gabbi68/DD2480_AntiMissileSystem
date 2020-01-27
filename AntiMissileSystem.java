@@ -110,10 +110,50 @@ double AREA2;
     }
     return false;
   }
-  public boolean lic2(){
-    return true; //TODO change to variable when function is ready
 
+
+  // There exists at least one set of three consecutive data points which form an angle such that: 
+  // angle < (PI−EPSILON) or angle > (PI+EPSILON)
+  public boolean lic2(){
+  // assumption: angle should be in radians
+  double angle;
+  double ab;
+  double bc;
+  double ca;
+
+  for (int i = 0; i < points.length-2; i++) {
+      // if not enough data points, just return false
+      if (points.length <= 2) {
+          return false;
+      }
+      // if first or last point coincides with vertex, the angle is undefiend
+      else if (points[i].x == points[i+1].x && points[i].y == points[i+1].y || points[i+2].x == points[i].x && points[i+2].y == points[i].y) {
+          continue;
+      }
+
+      // check if three points create a line
+      // http://mathworld.wolfram.com/Collinear.html
+      if (((points[i].x * (points[i+1].y - points[i+2].y)) + (points[i+1].x * (points[i+2].y - points[i].y)) + (points[i+2].x * (points[i].y - points[i+1].y))) == 0) {
+          angle = PI;
+      } else {
+            // calculate line ab
+          ab = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
+          // calculate line bc
+          bc = Math.sqrt(Math.pow(points[i+1].x - points[i+2].x, 2) + Math.pow(points[i+1].y - points[i+2].y, 2));
+          // calculate line ca
+          ca = Math.sqrt(Math.pow(points[i].x - points[i+2].x, 2) + Math.pow(points[i].y - points[i+2].y, 2));
+          // calculate angle for B
+          // https://en.wikipedia.org/wiki/Law_of_cosines
+          angle = Math.acos((Math.pow(ca,2) - Math.pow(bc,2) - Math.pow(ab,2)) /(-2*bc * ab));
+      }
+
+      if ((angle < (PI - EPSILON)) || (angle > (PI + EPSILON))) {
+          return true;
+      }
   }
+  return false;
+  }
+
   public boolean lic3(){
     return true; //TODO change to variable when function is ready
 
