@@ -22,13 +22,158 @@ public class ConditionTest{
     testInCirclePointTwoPointsTheSameReturnsFalse();
     */
     /*
-    ----------LIC 8 tests-------------------------*/
+    ----------LIC 8 tests-------------------------
     testLic8ReturnTrue();
     testLic8ReturnFalse();
     testLic8TooFewPointReturnFalse();
     testLic8ReturnTrue2();
-
+    */
+    /*
+    ----------LIC 9 tests----------------*/
+    testLic9PointCollideWithVertexReturnFalse();
+    testLic9ReturnTrue();
+    testLic9ReturnFalse();
+    testLic9ReturnTrue2();
+    testLic9NegativePointsReturnTrue();
+    testLic9PiPlusEpsilonAngle();
+    testLic9AngelEqualsPiReturnFalse();
   }
+
+  //-------------------LIC9 tests -------------------------
+  //first point collide with vertex, function returns false
+  public void testLic9PointCollideWithVertexReturnFalse(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 0.5;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,2.0);
+    if(run.lic9()){
+      System.out.println("testLic9PointCollideWithVertexReturnFalse = false");
+    }else{
+      System.out.println("testLic9PointCollideWithVertexReturnFalse = true");
+    }
+  }
+  //45 degree angle is less than 90 degree, function returns true
+  public void testLic9ReturnTrue(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = run.PI/2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,1.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9ReturnTrue = true");
+    }else{
+      System.out.println("testLic9ReturnTrue = false");
+    }
+  }
+  //45 degree is larger than PI-3 degrees but less than PI+3 segrees, function return false
+  public void testLic9ReturnFalse(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 3;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,1.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9ReturnFalse = false");
+    }else{
+      System.out.println("testLic9ReturnFalse = true");
+    }
+  }
+
+  //In first set, a and b collide, second set follow the condition
+  public void testLic9ReturnTrue2(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 1;
+    run.NUMPOINTS = 6;
+    run.points = new Point[6];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(1.0,1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,0.0);
+    run.points[5]= new Point(1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9ReturnTrue2 = true");
+    }else{
+      System.out.println("testLic9ReturnTrue2 = false");
+    }
+  }
+
+  //Points on the 3rd quadrant satisfy conditions
+  public void testLic9NegativePointsReturnTrue(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 1;
+    run.NUMPOINTS = 6;
+    run.points = new Point[6];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-1.0,-1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,0.0);
+    run.points[5]= new Point(-1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9NegativePointsReturnTrue = true");
+    }else{
+      System.out.println("testLic9NegativePointsReturnTrue = false");
+    }
+  }
+
+  //test angel that satify angle>PI+EPSILON
+  public void testLic9PiPlusEpsilonAngle(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 0.5;
+    run.NUMPOINTS = 6;
+    run.points = new Point[6];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(-1.0,-1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(1.0,0.0);
+    run.points[4]= new Point(0.0,-1.0);
+    run.points[5]= new Point(-1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9PiPlusEpsilonAngle = true");
+    }else{
+      System.out.println("testLic9PiPlusEpsilonAngle = false");
+    }
+  }
+
+  //Test if angle is equal to PI+EPSILON and PI-EPSILON, return false
+  public void testLic9AngelEqualsPiReturnFalse(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 0.0;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(-1.0,-1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(1.0,0.0);
+    run.points[4]= new Point(-1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9AngelEqualsPiReturnFalse = false");
+    }else{
+      System.out.println("testLic9AngelEqualsPiReturnFalse = true");
+    }
+  }
+
 
   //-------------------LIC8 tests -------------------------
   //a set of three points that satify all the contraints

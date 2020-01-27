@@ -119,7 +119,7 @@ double AREA2;
     if(NUMPOINTS<5 || 1>A_PTS || 1>B_PTS || A_PTS+B_PTS>NUMPOINTS-3 || RADIUS1<0){
       return false;
     }
-    
+
     for(int i=0; i<NUMPOINTS -(2+A_PTS+B_PTS); i++){
       Point a = points[i];
       Point b = points[i+A_PTS+1];
@@ -133,10 +133,39 @@ double AREA2;
     return false;
   }
 
+  /*Returns true if there exists at least one set of three data points separated
+  by exactly C_PTS and D_PTS consecutive intervening points, than form an angle
+  such that angel<(PI-EPSILON) or angle>(PI+EPSILON)*/
   public boolean lic9(){
-    return true; //TODO change to variable when function is ready
+    if(NUMPOINTS<5 || C_PTS<1 || D_PTS<1){
+      return false;
+    }
 
+    for(int i=0; i<NUMPOINTS -(2+C_PTS+D_PTS); i++){
+      Point a = points[i];
+      Point b = points[i+C_PTS+1];
+      Point c = points[i+C_PTS+D_PTS+2];
+
+      //if either a or c concide with the vertex, the lic is not satisfied and we need to continue the search
+      if((a.x==b.x && a.y==b.y) || (c.x==b.x && c.y==b.y)){
+        continue;
+      }
+
+      Point vectorBA = new Point(a.x-b.x, a.y-b.y);
+      Point vectorBC = new Point(c.x-b.x, c.y-b.y);
+      double lengthBA = Math.sqrt(Math.pow(vectorBA.x, 2) + Math.pow(vectorBA.y, 2));
+      double lengthBC = Math.sqrt(Math.pow(vectorBC.x, 2) + Math.pow(vectorBC.y, 2));
+      double dotProduct = vectorBA.x * vectorBC.x + vectorBA.y*vectorBC.y;
+
+      double angle = Math.acos(dotProduct/(lengthBA*lengthBC));
+
+      if(angle<PI-EPSILON || angle>PI+EPSILON){
+        return true;
+      }
+    }
+    return false;
   }
+
   public boolean lic10(){
     return true; //TODO change to variable when function is ready
 
