@@ -166,10 +166,27 @@ double AREA2;
     return false;
   }
 
+  /*Returns true if there exists at lest one set of three data points separated
+  by exactly E_PTS and F_PTS consecutive intervening points, that are the vertices
+  of a triangel with area greater than AREA1*/
   public boolean lic10(){
-    return true; //TODO change to variable when function is ready
+    if(NUMPOINTS<5 || E_PTS<1 || F_PTS<1 ){
+      return false;
+    }
 
+    for(int i=0; i< NUMPOINTS-(E_PTS+F_PTS+2); i++){
+      Point a = points[i];
+      Point b = points[i+E_PTS+1];
+      Point c = points[i+E_PTS+F_PTS+2];
+
+      double areaTriangel = Math.abs((a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))/2);
+      if(areaTriangel>AREA1){
+        return true;
+      }
+    }
+    return false;
   }
+
   public boolean lic11(){
     return true; //TODO change to variable when function is ready
 

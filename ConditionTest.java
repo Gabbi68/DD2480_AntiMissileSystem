@@ -29,7 +29,7 @@ public class ConditionTest{
     testLic8ReturnTrue2();
     */
     /*
-    ----------LIC 9 tests----------------*/
+    ----------LIC 9 tests----------------
     testLic9PointCollideWithVertexReturnFalse();
     testLic9ReturnTrue();
     testLic9ReturnFalse();
@@ -37,6 +37,111 @@ public class ConditionTest{
     testLic9NegativePointsReturnTrue();
     testLic9PiPlusEpsilonAngle();
     testLic9AngelEqualsPiReturnFalse();
+    */
+    /*
+    ------------LIC 10 tests-------------*/
+    testLic10LargerAreaReturnTrue();
+    testLic10EqualAreaReturnFalse();
+    testLic10LargeTriangelReturnTrue();
+    testLic10SecondTriangelLargerReturnTrue();
+    testLic10TooFewPointsReturnFalse();
+
+  }
+  //-------------------LIC10 tests -------------------------
+  //test that the area of a triangel with vertices (-1,0), (1,0) and (0,1) is greater than 0.5, returns true
+  public void testLic10LargerAreaReturnTrue(){
+    run.E_PTS=1;
+    run.F_PTS=1;
+    run.AREA1=0.5;
+    run.NUMPOINTS=5;
+    run.points = new Point[5];
+    run.points[0]= new Point(-1.0,0.0);
+    run.points[1]= new Point(-3.0,0.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,1.0);
+    if(run.lic10()){
+      System.out.println("testLic10LargerAreaReturnTrue = true");
+    }else{
+      System.out.println("testLic10LargerAreaReturnTrue = false");
+    }
+  }
+
+  //test that a triangel of equal area as AREA1 returns false
+  public void testLic10EqualAreaReturnFalse(){
+    run.E_PTS=1;
+    run.F_PTS=1;
+    run.AREA1=0.5;
+    run.NUMPOINTS=5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-3.0,0.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,1.0);
+    if(run.lic10()){
+      System.out.println("testLic10EqualAreaReturnFalse = false");
+    }else{
+      System.out.println("testLic10EqualAreaReturnFalse = true");
+    }
+  }
+  //test that a large triangel of size 317 is larger than 316, returns true
+  public void testLic10LargeTriangelReturnTrue(){
+    run.E_PTS=1;
+    run.F_PTS=2;
+    run.AREA1=316;
+    run.NUMPOINTS=7;
+    run.points = new Point[7];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(18.0,-7.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(35.0,14.0);
+    run.points[4]= new Point(0.0,1.0);
+    run.points[5]= new Point(0.0,1.0);
+    run.points[6]= new Point(49.0,-6.0);
+    if(run.lic10()){
+      System.out.println("testLic10LargeTriangelReturnTrue = true");
+    }else{
+      System.out.println("testLic10LargeTriangelReturnTrue = false");
+    }
+  }
+  //Test that first triangel is smaller than AREA1, but second is larger, function returns true
+  public void testLic10SecondTriangelLargerReturnTrue(){
+    run.E_PTS=1;
+    run.F_PTS=2;
+    run.AREA1=11.5;
+    run.NUMPOINTS=7;
+    run.points = new Point[7];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(1.0,5.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(-3.0,1.0);
+    run.points[4]= new Point(0.0,1.0);
+    run.points[5]= new Point(0.0,1.0);
+    run.points[6]= new Point(-2.0,8.0);
+    if(run.lic10()){
+      System.out.println("testLic10SecondTriangelLargerReturnTrue = true");
+    }else{
+      System.out.println("testLic10SecondTriangelLargerReturnTrue = false");
+    }
+  }
+  //test too few points, return false
+  public void testLic10TooFewPointsReturnFalse(){
+    run.E_PTS=1;
+    run.F_PTS=2;
+    run.AREA1=3;
+    run.NUMPOINTS=5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(1.0,5.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(-3.0,1.0);
+    run.points[4]= new Point(0.0,1.0);
+    if(run.lic10()){
+      System.out.println("testLic10TooFewPointsReturnFalse = false");
+    }else{
+      System.out.println("testLic10TooFewPointsReturnFalse = true");
+    }
   }
 
   //-------------------LIC9 tests -------------------------
