@@ -111,10 +111,28 @@ double AREA2;
     return true; //TODO change to variable when function is ready
 
   }
-  public boolean lic8(){
-    return true; //TODO change to variable when function is ready
 
+  /*Returns true if there exists at least one set of three data points who are
+  separated by exactly A_PTS and P_PTS consecutive intervening points, that
+  cannot be contained within or on a circle of radius RADIUS1*/
+  public boolean lic8(){
+    if(NUMPOINTS<5 || 1>A_PTS || 1>B_PTS || A_PTS+B_PTS>NUMPOINTS-3 || RADIUS1<0){
+      return false;
+    }
+    
+    for(int i=0; i<NUMPOINTS -(2+A_PTS+B_PTS); i++){
+      Point a = points[i];
+      Point b = points[i+A_PTS+1];
+      Point c = points[i+A_PTS+B_PTS+2];
+
+      if(!pointsInCircle(a, b, c, RADIUS1)){
+        return true;
+      }
+    }
+    //if no set of three points is not in circle, return false
+    return false;
   }
+
   public boolean lic9(){
     return true; //TODO change to variable when function is ready
 

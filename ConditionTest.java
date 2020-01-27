@@ -9,6 +9,8 @@ public class ConditionTest{
   }
 
   ConditionTest(){
+    /*
+    -------Circle test---------------
     testInCirclePointInLineReturnsTrue();
     testInCirclePointInLineReturnsFalse();
     testInCirclePointInLineWithLengthAsDiameterReturnsTrue();
@@ -18,7 +20,91 @@ public class ConditionTest{
     testInCirclePointAllPointTheSameReturnsTrue();
     testInCirclePointTwoPointsTheSameReturnsTrue();
     testInCirclePointTwoPointsTheSameReturnsFalse();
+    */
+    /*
+    ----------LIC 8 tests-------------------------*/
+    testLic8ReturnTrue();
+    testLic8ReturnFalse();
+    testLic8TooFewPointReturnFalse();
+    testLic8ReturnTrue2();
 
+  }
+
+  //-------------------LIC8 tests -------------------------
+  //a set of three points that satify all the contraints
+  public void testLic8ReturnTrue(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 1;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,2.0);
+    if(run.lic8()){
+      System.out.println("testLic8ReturnTrue = true");
+    }else{
+      System.out.println("testLic8ReturnTrue = false");
+    }
+  }
+
+  //set of points that do not satisfy the constraints, a line with length>diameter
+  public void testLic8ReturnFalse(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,2.0);
+    if(run.lic8()){
+      System.out.println("testLic8ReturnFalse= false");
+    }else{
+      System.out.println("testLic8ReturnFalse = true");
+    }
+  }
+
+  //too few points in the test case
+  public void testLic8TooFewPointReturnFalse(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 2;
+    run.points = new Point[4];
+    run.NUMPOINTS = 4;
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    if(run.lic8()){
+      System.out.println("testLic8TooFewPointReturnFalse= false");
+    }else{
+      System.out.println("testLic8TooFewPointReturnFalse = true");
+    }
+  }
+
+//test that first set is wrong, but second set satisfy the conditions
+  public void testLic8ReturnTrue2(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 2;
+    run.points = new Point[6];
+    run.NUMPOINTS = 6;
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,3.0);
+    run.points[5]= new Point(5.0,0.0);
+    if(run.lic8()){
+      System.out.println("testLic8ReturnTrue2= true");
+    }else{
+      System.out.println("testLic8ReturnTrue2 = false");
+    }
   }
 
   //--------------------Circle test---------------
