@@ -9,12 +9,14 @@ public class AntiMissileSystem{
 double PI = Math.PI;
 boolean[] lic = new boolean[15];
 
-boolean[] cmv = cmv();
+boolean[] cmv;// = cmv();
 
-boolean[][] pum = pum();
-boolean[] fuv = fuv();
+boolean[][] pum; //= pum();
+boolean[] fuv; // = fuv();
 
 Point[] points;
+
+String[][] lcm = new String[15][15];
 
 int NUMPOINTS;
 double LENGTH1;
@@ -46,8 +48,28 @@ double AREA2;
     System.out.println("NO");
   }
 
+
   public boolean[][] pum(){
-    boolean[][] pum = new boolean[15][15];
+    pum = new boolean[15][15];
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        if(lcm[i][j]=="NOTUSED"){
+          pum[i][j]=true;
+        }else if(lcm[i][j]=="ANDD"){
+          if(cmv[i] && cmv[j]){
+            pum[i][j]=true;
+          }else{
+            pum[i][j]=false;
+          }
+        }else if(lcm[i][j]=="ORR"){
+          if(cmv[i] || cmv[j]){
+            pum[i][j]=true;
+          }else{
+            pum[i][j]=false;
+          }
+        }
+      }
+    }
     return pum;
   }
 
@@ -94,7 +116,7 @@ double AREA2;
 }
 
 
-  // There exists at least one set of three consecutive data points that cannot all 
+  // There exists at least one set of three consecutive data points that cannot all
   // be contained within or on a circle of radius RADIUS1.
   public boolean lic1(){
     // not enough data points, just return false
@@ -112,7 +134,7 @@ double AREA2;
   }
 
 
-  // There exists at least one set of three consecutive data points which form an angle such that: 
+  // There exists at least one set of three consecutive data points which form an angle such that:
   // angle < (PI−EPSILON) or angle > (PI+EPSILON)
   public boolean lic2(){
   // assumption: angle should be in radians
@@ -154,7 +176,7 @@ double AREA2;
   return false;
   }
 
-  // There exists at least one set of three consecutive data points that are 
+  // There exists at least one set of three consecutive data points that are
   // the vertices of a triangle with area greater than AREA1.
   public boolean lic3(){
     double triangle_area;
@@ -173,7 +195,7 @@ double AREA2;
         if (((points[i].x * (points[i+1].y - points[i+2].y)) + (points[i+1].x * (points[i+2].y - points[i].y)) + (points[i+2].x * (points[i].y - points[i+1].y))) == 0) {
             continue;
         }
-        
+
         // calculate line ab
         ab = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
         // calculate line bc

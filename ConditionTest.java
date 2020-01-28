@@ -48,7 +48,7 @@ public class ConditionTest{
     */
     /*
     -------------LIC 11 tests-------------
-    */
+
     testLic11NegativeXReturnFalse();
     testLic11NegativeXReturnTrue();
     testLic11ReturnTrue();
@@ -61,15 +61,118 @@ public class ConditionTest{
   // LIC1 tests
 	testLic1ReturnTrue();
   testLic1ReturnFalse();
-  
+
   // LIC2 tests
 	testLic2ReturnTrue();
   testLic2ReturnFalse();
-  
+
   // LIC3 tests
 	testLic3ReturnTrue();
 	testLic3ReturnFalse();
+  */
+
+  /*---------------PUM test---------*/
+  testPUMTrue();
+  testPUMTrueCmvAllFalse();
+  testPUMFalse();
+  testPUMAndFalse();
   }
+  ///---------------PUM test---------
+  //Pum contains only true, should output true
+  public void testPUMTrue(){
+    boolean[][] testPum = new boolean[15][15];
+    run.cmv = new boolean[15];
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ANDD";
+        testPum[i][j] = true;
+      }
+    }
+    for(int j=0; j<15; j++){
+      run.cmv[j] = true;
+    }
+    run.pum();
+    if(Arrays.deepEquals(run.pum, testPum)){
+      System.out.println("testPUM = true");
+    }else{
+      System.out.println("testPUM = false");
+    }
+  }
+
+  //test that pum is true even if all cmv is false
+  public void testPUMTrueCmvAllFalse(){
+    boolean[][] testPum = new boolean[15][15];
+    run.cmv = new boolean[15];
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "NOTUSED";
+        testPum[i][j] = true;
+      }
+    }
+    for(int j=0; j<15; j++){
+      run.cmv[j] = false;
+    }
+    run.pum();
+    if(Arrays.deepEquals(run.pum, testPum)){
+      System.out.println("testPUMTrueCmvAllFalse = true");
+    }else{
+      System.out.println("testPUMTrueCmvAllFalse = false");
+    }
+  }
+
+  //test that pum has false entries, return false
+  public void testPUMFalse(){
+    boolean[][] testPum = new boolean[15][15];
+    run.cmv = new boolean[15];
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ORR";
+        testPum[i][j] = true;
+      }
+    }
+    boolean flag = true;
+    for(int j=0; j<15; j++){
+      if(flag){
+        run.cmv[j]=true;
+        flag = false;
+      }else{
+        run.cmv[j] = false;
+        flag=true;
+      }
+    }
+    run.pum();
+    if(Arrays.deepEquals(run.pum, testPum)){
+      System.out.println("testPUMFalse = false");
+    }else{
+      System.out.println("testPUMFalse = true");
+    }
+  }
+
+  //test that pum is not true for all entries when one entrie in cmv is false
+  public void testPUMAndFalse(){
+    boolean[][] testPum = new boolean[15][15];
+    run.cmv = new boolean[15];
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ANDD";
+        testPum[i][j] = true;
+      }
+    }
+    testPum[14][14] = false;
+    boolean flag = true;
+    for(int j=0; j<14; j++){
+      run.cmv[j]=true;
+    }
+    run.cmv[14]=false;
+    run.pum();
+    if(Arrays.deepEquals(run.pum, testPum)){
+      System.out.println("testPUMAndFalse = false");
+    }else{
+      System.out.println("testPUMAndFalse = true");
+    }
+  }
+
+
   //-------------------LIC11 tests -------------------------
   //test no set is true due to 0 !< 0 and double negation (-2--3=1), returns false
   public void testLic11NegativeXReturnFalse(){
@@ -592,7 +695,7 @@ public class ConditionTest{
 			System.out.println("testLic0ReturnFalse = true");
 		}
   }
-  
+
   //--------------LIC1-----------------
 	public void testLic1ReturnTrue(){
 		// all points can not be in or on circle
@@ -624,7 +727,7 @@ public class ConditionTest{
 			System.out.println("testLic1ReturnFalse = true");
 		}
   }
-  
+
   //--------------LIC2-----------------
 	public void testLic2ReturnTrue(){
 		// angle will be less than pi-0
@@ -655,7 +758,7 @@ public class ConditionTest{
 			System.out.println("testLic2ReturnFalse = true");
 		}
   }
-  
+
   	//--------------LIC3-----------------
 	public void testLic3ReturnTrue(){
 		// area will be 28, bigger than AREA1
