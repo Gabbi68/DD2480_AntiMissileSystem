@@ -129,16 +129,16 @@ double AREA2;
   }
 
   public boolean lic12(){
-    if (NUMPOINTS < 3 || K_PTS > NUMPOINTS) {
+    if (NUMPOINTS < 3 || (K_PTS + 2) > NUMPOINTS) {
       return false;
     }
 
     boolean first = false;
     boolean second = false;
 
-    for (int i = K_PTS; i < NUMPOINTS; i++) {
+    for (int i = 0; i < (NUMPOINTS - K_PTS - 1); i++) {
       Point a = points[i];
-      Point b = points[i - K_PTS];
+      Point b = points[i + K_PTS + 1];
       double length = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
       if (length > LENGTH1) {
         first = true;
@@ -157,17 +157,17 @@ double AREA2;
   }
 
   public boolean lic13(){
-    if (NUMPOINTS < 5 || (A_PTS + B_PTS) > NUMPOINTS) {
+    if (NUMPOINTS < 5 || (A_PTS + B_PTS + 3) > NUMPOINTS) {
       return false;
     }
 
     boolean first = false;
     boolean second = false;
 
-    for (int i = (A_PTS + B_PTS); i < NUMPOINTS; i++) {
+    for (int i = 0; i < (NUMPOINTS - A_PTS - B_PTS - 2); i++) {
       Point a = points[i];
-      Point b = points[i - B_PTS];
-      Point b = points[i - B_PTS - A_PTS];
+      Point b = points[i + A_PTS + 1];
+      Point b = points[i + A_PTS + B_PTS + 2];
       if (!pointsInCircle(a, b, c, RADIUS1)) {
         first = true;
       }
@@ -185,20 +185,18 @@ double AREA2;
   }
 
   public boolean lic14(){
-    if (NUMPOINTS < 5 || (E_PTS + F_PTS) > NUMPOINTS) {
+    if (NUMPOINTS < 5 || (E_PTS + F_PTS + 3) > NUMPOINTS) {
       return false;
     }
 
     boolean first = false;
     boolean second = false;
 
-    for (int i = (E_PTS + F_PTS); i < NUMPOINTS; i++) {
+    for (int i = 0; i < (NUMPOINTS - E_PTS - F_PTS - 2); i++) {
       Point a = points[i];
-      Point b = points[i - F_PTS];
-      Point c = points[i - F_PTS - E_PTS];
-
+      Point b = points[i + E_PTS + 1];
+      Point c = points[i + E_PTS + F_PTS + 2];
       double area = Math.abs(a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))/2;
-
       if (area > AREA1) {
         first = true;
       }
