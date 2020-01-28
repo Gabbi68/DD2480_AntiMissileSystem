@@ -79,22 +79,119 @@ double AREA2;
 
   }
 
-  public boolean lic0(){
-    return true; //TODO change to variable when function is ready
+ // There exists at least one set of two consecutive data points that are a distance greater than the length, LENGTH1, apart
+ public boolean lic0(){
+  double dst;
 
+  for (int i = 0; i < points.length-1; i++) {
+      // distance formula
+      dst = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
+      if (dst > LENGTH1) {
+          return true;
+      }
   }
+  return false;
+}
+
+
+  // There exists at least one set of three consecutive data points that cannot all 
+  // be contained within or on a circle of radius RADIUS1.
   public boolean lic1(){
-    return true; //TODO change to variable when function is ready
+    // not enough data points, just return false
+    if (points.length <= 2) {
+        return false;
+    }
 
+    for (int i = 0; i < points.length-2; i++) {
+        // if points cannot be contained within a circle of radius RADIUS1
+        if (pointsInCircle(points[i], points[i+1], points[i+2], RADIUS1) == false) {
+            return true;
+        }
+    }
+    return false;
   }
+
+
+  // There exists at least one set of three consecutive data points which form an angle such that: 
+  // angle < (PI−EPSILON) or angle > (PI+EPSILON)
   public boolean lic2(){
-    return true; //TODO change to variable when function is ready
+  // assumption: angle should be in radians
+  double angle;
+  double ab;
+  double bc;
+  double ca;
 
+  for (int i = 0; i < points.length-2; i++) {
+      // if not enough data points, just return false
+      if (points.length <= 2) {
+          return false;
+      }
+      // if first or last point coincides with vertex, the angle is undefiend
+      else if (points[i].x == points[i+1].x && points[i].y == points[i+1].y || points[i+2].x == points[i].x && points[i+2].y == points[i].y) {
+          continue;
+      }
+
+      // check if three points create a line
+      // http://mathworld.wolfram.com/Collinear.html
+      if (((points[i].x * (points[i+1].y - points[i+2].y)) + (points[i+1].x * (points[i+2].y - points[i].y)) + (points[i+2].x * (points[i].y - points[i+1].y))) == 0) {
+          angle = PI;
+      } else {
+            // calculate line ab
+          ab = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
+          // calculate line bc
+          bc = Math.sqrt(Math.pow(points[i+1].x - points[i+2].x, 2) + Math.pow(points[i+1].y - points[i+2].y, 2));
+          // calculate line ca
+          ca = Math.sqrt(Math.pow(points[i].x - points[i+2].x, 2) + Math.pow(points[i].y - points[i+2].y, 2));
+          // calculate angle for B
+          // https://en.wikipedia.org/wiki/Law_of_cosines
+          angle = Math.acos((Math.pow(ca,2) - Math.pow(bc,2) - Math.pow(ab,2)) /(-2*bc * ab));
+      }
+
+      if ((angle < (PI - EPSILON)) || (angle > (PI + EPSILON))) {
+          return true;
+      }
   }
+  return false;
+  }
+
+  // There exists at least one set of three consecutive data points that are 
+  // the vertices of a triangle with area greater than AREA1.
   public boolean lic3(){
-    return true; //TODO change to variable when function is ready
+    double triangle_area;
+    double ab;
+    double bc;
+    double ca;
+    double s;
 
+    for (int i = 0; i < points.length-2; i++) {
+        // if less than 3 points it's not possible to create a triangle
+        if (points.length <= 2) {
+            return false;
+        }
+        // check if three points create a line
+        // http://mathworld.wolfram.com/Collinear.html
+        if (((points[i].x * (points[i+1].y - points[i+2].y)) + (points[i+1].x * (points[i+2].y - points[i].y)) + (points[i+2].x * (points[i].y - points[i+1].y))) == 0) {
+            continue;
+        }
+        
+        // calculate line ab
+        ab = Math.sqrt(Math.pow(points[i+1].x - points[i].x, 2) + Math.pow(points[i+1].y - points[i].y, 2));
+        // calculate line bc
+        bc = Math.sqrt(Math.pow(points[i+1].x - points[i+2].x, 2) + Math.pow(points[i+1].y - points[i+2].y, 2));
+        // calculate line ca
+        ca = Math.sqrt(Math.pow(points[i].x - points[i+2].x, 2) + Math.pow(points[i].y - points[i+2].y, 2));
+        // Semiperimeter
+        s = (ab + bc + ca) / 2;
+        // https://en.wikipedia.org/wiki/Heron%27s_formula
+        triangle_area = Math.sqrt(s * (s-ab) * (s-bc) * (s-ca));
+
+        if (triangle_area > AREA1) {
+            return true;
+        }
+    }
+    return false;
   }
+
   public boolean lic4(){
     return true; //TODO change to variable when function is ready
 

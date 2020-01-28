@@ -19,6 +19,21 @@ public class ConditionTest{
     testInCirclePointTwoPointsTheSameReturnsTrue();
     testInCirclePointTwoPointsTheSameReturnsFalse();
 
+    // LIC0 tests
+	testLic0ReturnTrue();
+	testLic0ReturnFalse();
+
+  // LIC1 tests
+	testLic1ReturnTrue();
+  testLic1ReturnFalse();
+  
+  // LIC2 tests
+	testLic2ReturnTrue();
+  testLic2ReturnFalse();
+  
+  // LIC3 tests
+	testLic3ReturnTrue();
+	testLic3ReturnFalse();
   }
 
   //--------------------Circle test---------------
@@ -139,4 +154,129 @@ public class ConditionTest{
       System.out.println("testInCirclePointTwoPointsTheSameReturnsFalse = true");
     }
   }
+
+  //--------------LIC0-----------------
+	public void testLic0ReturnTrue(){
+		// points will be more than 1 apart
+		run.LENGTH1 = 1;
+		run.points = new Point[2];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(5, 5);
+
+		if(run.lic0()){
+			System.out.println("testLic0ReturnTrue = true");
+		}else{
+			System.out.println("testLic0ReturnTrue = false");
+		}
+	}
+
+	public void testLic0ReturnFalse(){
+		// points will be less than 5 apart
+		run.LENGTH1 = 5;
+		run.points = new Point[2];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(1, 1);
+
+		if(run.lic0()){
+			System.out.println("testLic0ReturnFalse = false");
+		}else{
+			System.out.println("testLic0ReturnFalse = true");
+		}
+  }
+  
+  //--------------LIC1-----------------
+	public void testLic1ReturnTrue(){
+		// all points can not be in or on circle
+		run.RADIUS1 = 2;
+		run.points = new Point[3];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(6, 6);
+		run.points[2]= new Point(-10, -10);
+
+		if(run.lic1()){
+			System.out.println("testLic1ReturnTrue = true");
+		}else{
+			System.out.println("testLic1ReturnTrue = false");
+		}
+	}
+
+	public void testLic1ReturnFalse(){
+		// all points will be in circle
+		run.RADIUS1 = 4;
+		run.points = new Point[3];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(1, 1);
+		run.points[2]= new Point(-1, -1);
+
+
+		if(run.lic1()){
+			System.out.println("testLic1ReturnFalse = false");
+		}else{
+			System.out.println("testLic1ReturnFalse = true");
+		}
+  }
+  
+  //--------------LIC2-----------------
+	public void testLic2ReturnTrue(){
+		// angle will be less than pi-0
+		run.EPSILON = 0;
+		run.points = new Point[3];
+		run.points[0]= new Point(-1, 1);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(1, 1);
+
+		if(run.lic2()){
+			System.out.println("testLic2ReturnTrue = true");
+		}else{
+			System.out.println("testLic2ReturnTrue = false");
+		}
+	}
+
+	public void testLic2ReturnFalse(){
+		// first point coincides with vertex, angle is undefined
+		run.EPSILON = 0;
+		run.points = new Point[3];
+		run.points[0]= new Point(1, 1);
+		run.points[1]= new Point(1, 1);
+		run.points[2]= new Point(3, 3);
+
+		if(run.lic2()){
+			System.out.println("testLic2ReturnFalse = false");
+		}else{
+			System.out.println("testLic2ReturnFalse = true");
+		}
+  }
+  
+  	//--------------LIC3-----------------
+	public void testLic3ReturnTrue(){
+		// area will be 28, bigger than AREA1
+		run.AREA1 = 1;
+		run.points = new Point[3];
+		run.points[0]= new Point(-2, -2);
+		run.points[1]= new Point(4, 3);
+		run.points[2]= new Point(-6, 4);
+
+		if(run.lic2()){
+			System.out.println("testLic3ReturnTrue = true");
+		}else{
+			System.out.println("testLic3ReturnTrue = false");
+		}
+	}
+
+	public void testLic3ReturnFalse(){
+		// collinear should fail
+		run.AREA1 = 1;
+		run.points = new Point[3];
+		run.points[0]= new Point(1, 2);
+		run.points[1]= new Point(2, 3);
+		run.points[2]= new Point(5, 6);
+
+		if(run.lic2()){
+			System.out.println("testLic3ReturnFalse = false");
+		}else{
+			System.out.println("testLic3ReturnFalse = true");
+		}
+	}
+
+
 }
