@@ -12,7 +12,8 @@ boolean[] lic = new boolean[15];
 boolean[] cmv = cmv();
 
 boolean[][] pum = pum();
-boolean[] fuv = fuv();
+boolean[] fuv = new boolean[15];
+boolean[] puv = new boolean[15];
 
 Point[] points;
 
@@ -73,10 +74,23 @@ double AREA2;
     return cmv;
   }
 
-  public boolean[] fuv(){
-    boolean[] fuv = new boolean[15];
-    return fuv;
+  public void setFuv(){
 
+    for(int i = 0; i < 14; i++){
+      if (!puv[i]){
+        fuv[i] = true;
+      }else {
+        int nrOfFalse = 0;
+        for(int j = 0; j < 14; j++){
+          if(!pum[i][j]){
+            nrOfFalse++;
+          }
+        }
+        if(nrOfFalse == 0){
+          fuv[i] = true;
+        }
+      }
+    }
   }
 
   public boolean lic0(){
@@ -96,10 +110,32 @@ double AREA2;
 
   }
   public boolean lic4(){
+
+    if((2 <= Q_PTS) & (Q_PTS <= NUMPOINTS)){
+      return true;
+    }
+
+    if((1 <= QUADS) & (QUADS >= 3)){
+      return true;
+    }
+
     return true; //TODO change to variable when function is ready
 
   }
   public boolean lic5(){
+    Point point1,point2;
+
+    for(int i = 0; i < points.length-1;i++){
+      point1 = points[i];
+      point2 = points[i+1];
+
+      if(point1.x == point2.y-1){
+        return true;
+      }
+
+    }
+    return false;
+
     return true; //TODO change to variable when function is ready
 
   }
@@ -108,6 +144,23 @@ double AREA2;
 
   }
   public boolean lic7(){
+
+    if(NUMPOINTS < 3){
+      return false;
+    }else {
+      for(int i = 0;i < NUMPOINTS - 1 - K_PTS;){
+
+        Point X = points[i];
+        Point Y = points[i+1];
+        double CIT = Math.sqrt(Math.pow((X.x - Y.x),2)+Math.pow((X.y-Y.y),2));
+        if(CIT > LENGTH1){
+          return true;
+        }
+        i++;
+      }
+      return false;
+    }
+
     return true; //TODO change to variable when function is ready
 
   }
