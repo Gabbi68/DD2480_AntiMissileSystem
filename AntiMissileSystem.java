@@ -208,22 +208,99 @@ double AREA2;
     return true; //TODO change to variable when function is ready
 
   }
+
+  /*Returns true if there exists at least one set of three data points who are
+  separated by exactly A_PTS and P_PTS consecutive intervening points, that
+  cannot be contained within or on a circle of radius RADIUS1*/
   public boolean lic8(){
-    return true; //TODO change to variable when function is ready
+    if(NUMPOINTS<5 || 1>A_PTS || 1>B_PTS || A_PTS+B_PTS>NUMPOINTS-3 || RADIUS1<0){
+      return false;
+    }
 
+    for(int i=0; i<NUMPOINTS -(2+A_PTS+B_PTS); i++){
+      Point a = points[i];
+      Point b = points[i+A_PTS+1];
+      Point c = points[i+A_PTS+B_PTS+2];
+
+      if(!pointsInCircle(a, b, c, RADIUS1)){
+        return true;
+      }
+    }
+    //if no set of three points is not in circle, return false
+    return false;
   }
+
+  /*Returns true if there exists at least one set of three data points separated
+  by exactly C_PTS and D_PTS consecutive intervening points, than form an angle
+  such that angel<(PI-EPSILON) or angle>(PI+EPSILON)*/
   public boolean lic9(){
-    return true; //TODO change to variable when function is ready
+    if(NUMPOINTS<5 || C_PTS<1 || D_PTS<1){
+      return false;
+    }
 
+    for(int i=0; i<NUMPOINTS -(2+C_PTS+D_PTS); i++){
+      Point a = points[i];
+      Point b = points[i+C_PTS+1];
+      Point c = points[i+C_PTS+D_PTS+2];
+
+      //if either a or c concide with the vertex, the lic is not satisfied and we need to continue the search
+      if((a.x==b.x && a.y==b.y) || (c.x==b.x && c.y==b.y)){
+        continue;
+      }
+
+      Point vectorBA = new Point(a.x-b.x, a.y-b.y);
+      Point vectorBC = new Point(c.x-b.x, c.y-b.y);
+      double lengthBA = Math.sqrt(Math.pow(vectorBA.x, 2) + Math.pow(vectorBA.y, 2));
+      double lengthBC = Math.sqrt(Math.pow(vectorBC.x, 2) + Math.pow(vectorBC.y, 2));
+      double dotProduct = vectorBA.x * vectorBC.x + vectorBA.y*vectorBC.y;
+
+      double angle = Math.acos(dotProduct/(lengthBA*lengthBC));
+
+      if(angle<PI-EPSILON || angle>PI+EPSILON){
+        return true;
+      }
+    }
+    return false;
   }
+
+  /*Returns true if there exists at lest one set of three data points separated
+  by exactly E_PTS and F_PTS consecutive intervening points, that are the vertices
+  of a triangel with area greater than AREA1*/
   public boolean lic10(){
-    return true; //TODO change to variable when function is ready
+    if(NUMPOINTS<5 || E_PTS<1 || F_PTS<1 ){
+      return false;
+    }
 
+    for(int i=0; i< NUMPOINTS-(E_PTS+F_PTS+2); i++){
+      Point a = points[i];
+      Point b = points[i+E_PTS+1];
+      Point c = points[i+E_PTS+F_PTS+2];
+
+      double areaTriangel = Math.abs((a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))/2);
+      if(areaTriangel>AREA1){
+        return true;
+      }
+    }
+    return false;
   }
+
+  /*Returns true if there exists at least one set of two data points,
+  (X[i],Y[i]) and (X[j],Y[j]), separeated by exactly G_PTS consecutive intervening
+  points, such that X[j]-X[i]<0 (i<j)*/
   public boolean lic11(){
-    return true; //TODO change to variable when function is ready
-
+    if(NUMPOINTS<3 || G_PTS<1 || G_PTS>NUMPOINTS-2){
+      return false;
+    }
+    for(int i=0; i< NUMPOINTS-G_PTS-1; i++){
+      Point a = points[i];
+      Point b = points[i+G_PTS+1];
+      if( (b.x-a.x) < 0){
+        return true;
+      }
+    }
+    return false;
   }
+
   public boolean lic12(){
     return true; //TODO change to variable when function is ready
 

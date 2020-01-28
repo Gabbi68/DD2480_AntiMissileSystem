@@ -9,6 +9,8 @@ public class ConditionTest{
   }
 
   ConditionTest(){
+    /*
+    -------Circle test---------------
     testInCirclePointInLineReturnsTrue();
     testInCirclePointInLineReturnsFalse();
     testInCirclePointInLineWithLengthAsDiameterReturnsTrue();
@@ -18,6 +20,39 @@ public class ConditionTest{
     testInCirclePointAllPointTheSameReturnsTrue();
     testInCirclePointTwoPointsTheSameReturnsTrue();
     testInCirclePointTwoPointsTheSameReturnsFalse();
+    */
+    /*
+    ----------LIC 8 tests-------------------------
+    testLic8ReturnTrue();
+    testLic8ReturnFalse();
+    testLic8TooFewPointReturnFalse();
+    testLic8ReturnTrue2();
+    */
+    /*
+    ----------LIC 9 tests----------------
+    testLic9PointCollideWithVertexReturnFalse();
+    testLic9ReturnTrue();
+    testLic9ReturnFalse();
+    testLic9ReturnTrue2();
+    testLic9NegativePointsReturnTrue();
+    testLic9PiPlusEpsilonAngle();
+    testLic9AngelEqualsPiReturnFalse();
+    */
+    /*
+    ------------LIC 10 tests-------------
+    testLic10LargerAreaReturnTrue();
+    testLic10EqualAreaReturnFalse();
+    testLic10LargeTriangelReturnTrue();
+    testLic10SecondTriangelLargerReturnTrue();
+    testLic10TooFewPointsReturnFalse();
+    */
+    /*
+    -------------LIC 11 tests-------------
+    */
+    testLic11NegativeXReturnFalse();
+    testLic11NegativeXReturnTrue();
+    testLic11ReturnTrue();
+    testLic11TooFewPointsReturnFalse();
 
     // LIC0 tests
 	testLic0ReturnTrue();
@@ -34,6 +69,380 @@ public class ConditionTest{
   // LIC3 tests
 	testLic3ReturnTrue();
 	testLic3ReturnFalse();
+  }
+  //-------------------LIC11 tests -------------------------
+  //test no set is true due to 0 !< 0 and double negation (-2--3=1), returns false
+  public void testLic11NegativeXReturnFalse(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-3.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(-2.0,2.0);
+    if(run.lic11()){
+      System.out.println("testLic11NegativeXReturnFalse = false");
+    }else{
+      System.out.println("testLic11NegativeXReturnFalse = true");
+    }
+  }
+  //test where a double negative gives a negative answer, returns true
+  public void testLic11NegativeXReturnTrue(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-1.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(-2.0,2.0);
+    if(run.lic11()){
+      System.out.println("testLic11NegativeXReturnTrue = true");
+    }else{
+      System.out.println("testLic11NegativeXReturnTrue = false");
+    }
+  }
+
+  //test when first set is false but second is true, returns true
+  public void testLic11ReturnTrue(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(-2.0,0.0);
+    run.points[4]= new Point(0.0,2.0);
+    if(run.lic11()){
+      System.out.println("testLic11ReturnTrue = true");
+    }else{
+      System.out.println("testLic11XReturnTrue = false");
+    }
+  }
+
+  //test with too few points, return false
+  public void testLic11TooFewPointsReturnFalse(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 3;
+    run.points = new Point[3];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    if(run.lic11()){
+      System.out.println("testLic11TooFewPointsReturnFalse = false");
+    }else{
+      System.out.println("testLic11TooFewPointsReturnFalse = true");
+    }
+  }
+  //-------------------LIC10 tests -------------------------
+  //test that the area of a triangel with vertices (-1,0), (1,0) and (0,1) is greater than 0.5, returns true
+  public void testLic10LargerAreaReturnTrue(){
+    run.E_PTS=1;
+    run.F_PTS=1;
+    run.AREA1=0.5;
+    run.NUMPOINTS=5;
+    run.points = new Point[5];
+    run.points[0]= new Point(-1.0,0.0);
+    run.points[1]= new Point(-3.0,0.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,1.0);
+    if(run.lic10()){
+      System.out.println("testLic10LargerAreaReturnTrue = true");
+    }else{
+      System.out.println("testLic10LargerAreaReturnTrue = false");
+    }
+  }
+
+  //test that a triangel of equal area as AREA1 returns false
+  public void testLic10EqualAreaReturnFalse(){
+    run.E_PTS=1;
+    run.F_PTS=1;
+    run.AREA1=0.5;
+    run.NUMPOINTS=5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-3.0,0.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,1.0);
+    if(run.lic10()){
+      System.out.println("testLic10EqualAreaReturnFalse = false");
+    }else{
+      System.out.println("testLic10EqualAreaReturnFalse = true");
+    }
+  }
+  //test that a large triangel of size 317 is larger than 316, returns true
+  public void testLic10LargeTriangelReturnTrue(){
+    run.E_PTS=1;
+    run.F_PTS=2;
+    run.AREA1=316;
+    run.NUMPOINTS=7;
+    run.points = new Point[7];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(18.0,-7.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(35.0,14.0);
+    run.points[4]= new Point(0.0,1.0);
+    run.points[5]= new Point(0.0,1.0);
+    run.points[6]= new Point(49.0,-6.0);
+    if(run.lic10()){
+      System.out.println("testLic10LargeTriangelReturnTrue = true");
+    }else{
+      System.out.println("testLic10LargeTriangelReturnTrue = false");
+    }
+  }
+  //Test that first triangel is smaller than AREA1, but second is larger, function returns true
+  public void testLic10SecondTriangelLargerReturnTrue(){
+    run.E_PTS=1;
+    run.F_PTS=2;
+    run.AREA1=11.5;
+    run.NUMPOINTS=7;
+    run.points = new Point[7];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(1.0,5.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(-3.0,1.0);
+    run.points[4]= new Point(0.0,1.0);
+    run.points[5]= new Point(0.0,1.0);
+    run.points[6]= new Point(-2.0,8.0);
+    if(run.lic10()){
+      System.out.println("testLic10SecondTriangelLargerReturnTrue = true");
+    }else{
+      System.out.println("testLic10SecondTriangelLargerReturnTrue = false");
+    }
+  }
+  //test too few points, return false
+  public void testLic10TooFewPointsReturnFalse(){
+    run.E_PTS=1;
+    run.F_PTS=2;
+    run.AREA1=3;
+    run.NUMPOINTS=5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(1.0,5.0);
+    run.points[2]= new Point(1.0,0.0);
+    run.points[3]= new Point(-3.0,1.0);
+    run.points[4]= new Point(0.0,1.0);
+    if(run.lic10()){
+      System.out.println("testLic10TooFewPointsReturnFalse = false");
+    }else{
+      System.out.println("testLic10TooFewPointsReturnFalse = true");
+    }
+  }
+
+  //-------------------LIC9 tests -------------------------
+  //first point collide with vertex, function returns false
+  public void testLic9PointCollideWithVertexReturnFalse(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 0.5;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,2.0);
+    if(run.lic9()){
+      System.out.println("testLic9PointCollideWithVertexReturnFalse = false");
+    }else{
+      System.out.println("testLic9PointCollideWithVertexReturnFalse = true");
+    }
+  }
+  //45 degree angle is less than 90 degree, function returns true
+  public void testLic9ReturnTrue(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = run.PI/2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,1.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9ReturnTrue = true");
+    }else{
+      System.out.println("testLic9ReturnTrue = false");
+    }
+  }
+  //45 degree is larger than PI-3 degrees but less than PI+3 segrees, function return false
+  public void testLic9ReturnFalse(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 3;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,1.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9ReturnFalse = false");
+    }else{
+      System.out.println("testLic9ReturnFalse = true");
+    }
+  }
+
+  //In first set, a and b collide, second set follow the condition
+  public void testLic9ReturnTrue2(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 1;
+    run.NUMPOINTS = 6;
+    run.points = new Point[6];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(1.0,1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,0.0);
+    run.points[5]= new Point(1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9ReturnTrue2 = true");
+    }else{
+      System.out.println("testLic9ReturnTrue2 = false");
+    }
+  }
+
+  //Points on the 3rd quadrant satisfy conditions
+  public void testLic9NegativePointsReturnTrue(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 1;
+    run.NUMPOINTS = 6;
+    run.points = new Point[6];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-1.0,-1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(0.0,0.0);
+    run.points[5]= new Point(-1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9NegativePointsReturnTrue = true");
+    }else{
+      System.out.println("testLic9NegativePointsReturnTrue = false");
+    }
+  }
+
+  //test angel that satify angle>PI+EPSILON
+  public void testLic9PiPlusEpsilonAngle(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 0.5;
+    run.NUMPOINTS = 6;
+    run.points = new Point[6];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(-1.0,-1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(1.0,0.0);
+    run.points[4]= new Point(0.0,-1.0);
+    run.points[5]= new Point(-1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9PiPlusEpsilonAngle = true");
+    }else{
+      System.out.println("testLic9PiPlusEpsilonAngle = false");
+    }
+  }
+
+  //Test if angle is equal to PI+EPSILON and PI-EPSILON, return false
+  public void testLic9AngelEqualsPiReturnFalse(){
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.EPSILON = 0.0;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(-1.0,-1.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(1.0,0.0);
+    run.points[4]= new Point(-1.0,0.0);
+    if(run.lic9()){
+      System.out.println("testLic9AngelEqualsPiReturnFalse = false");
+    }else{
+      System.out.println("testLic9AngelEqualsPiReturnFalse = true");
+    }
+  }
+
+
+  //-------------------LIC8 tests -------------------------
+  //a set of three points that satify all the contraints
+  public void testLic8ReturnTrue(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 1;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,2.0);
+    if(run.lic8()){
+      System.out.println("testLic8ReturnTrue = true");
+    }else{
+      System.out.println("testLic8ReturnTrue = false");
+    }
+  }
+
+  //set of points that do not satisfy the constraints, a line with length>diameter
+  public void testLic8ReturnFalse(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,2.0);
+    if(run.lic8()){
+      System.out.println("testLic8ReturnFalse= false");
+    }else{
+      System.out.println("testLic8ReturnFalse = true");
+    }
+  }
+
+  //too few points in the test case
+  public void testLic8TooFewPointReturnFalse(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 2;
+    run.points = new Point[4];
+    run.NUMPOINTS = 4;
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    if(run.lic8()){
+      System.out.println("testLic8TooFewPointReturnFalse= false");
+    }else{
+      System.out.println("testLic8TooFewPointReturnFalse = true");
+    }
+  }
+
+//test that first set is wrong, but second set satisfy the conditions
+  public void testLic8ReturnTrue2(){
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 2;
+    run.points = new Point[6];
+    run.NUMPOINTS = 6;
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(1.0,1.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(2.0,3.0);
+    run.points[5]= new Point(5.0,0.0);
+    if(run.lic8()){
+      System.out.println("testLic8ReturnTrue2= true");
+    }else{
+      System.out.println("testLic8ReturnTrue2 = false");
+    }
   }
 
   //--------------------Circle test---------------
