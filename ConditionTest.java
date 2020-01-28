@@ -71,6 +71,18 @@ public class ConditionTest{
 	testLic3ReturnFalse();
   */
 
+  // LIC12 tests
+  testLic12ReturnTrue();
+  testLic12ReturnFalse();
+  
+  // LIC13 tests
+  testLic13ReturnTrue();
+  testLic13ReturnFalse();
+
+  // LIC14 tests
+  testLic14ReturnTrue();
+  testLic14ReturnTrue2();
+
   /*---------------PUM test---------*/
   testPUMTrue();
   testPUMTrueCmvAllFalse();
@@ -771,7 +783,7 @@ public class ConditionTest{
 		}
 	}
 
-  public void testLic14ReturnTrue(){
+  public void testLic14ReturnTrue2(){
     // there exist points seperated by E_PTS and F_PTS that create a triangle with area greater than AREA1 and less than AREA2
     run.NUMPOINTS = 5;
     run.E_PTS = 1;

@@ -9,46 +9,65 @@ public class AntiMissileSystem{
 double PI = Math.PI;
 boolean[] lic = new boolean[15];
 
-boolean[] cmv;// = cmv();
+boolean[] cmv = new boolean[15];
 
-boolean[][] pum; //= pum();
-boolean[] fuv; // = fuv();
-
-Point[] points;
+boolean[][] pum;
+// final unlocking vector
+boolean[] fuv = {true, true,true,true,true,true,true,true,true,true,true,true,true,true,true};// = fuv();
+// array with numpoints
+Point[] points = {new Point(0, 1), new Point(1, 2), new Point(3, 4), new Point(3, 4), new Point(3, 8)};
 
 String[][] lcm = new String[15][15];
 
-int NUMPOINTS;
-double LENGTH1;
-double RADIUS1 ;
-double EPSILON;
-double AREA1;
-int Q_PTS ;
-int QUADS;
-double DIST;
-int N_PTS;
-int K_PTS;
-int A_PTS;
-int B_PTS;
-int C_PTS;
-int D_PTS;
-int E_PTS;
-int F_PTS;
-int G_PTS;
-double LENGTH2;
-double RADIUS2;
-double AREA2;
+int NUMPOINTS = points.length;
+double LENGTH1 = 1;
+double RADIUS1 = 1;
+double EPSILON = 1;
+double AREA1 = 1;
+int Q_PTS = 1;
+int QUADS = 4;
+double DIST = 1;
+int N_PTS = 3;
+int K_PTS = 2;
+int A_PTS = 2;
+int B_PTS = 2;
+int C_PTS = 2;
+int D_PTS = 2;
+int E_PTS = 2;
+int F_PTS = 2;
+int G_PTS = 2;
+double LENGTH2 = 3;
+double RADIUS2 = 4;
+double AREA2 = 2;
 
 
   public static void main( String[] args ) {
     AntiMissileSystem run = new AntiMissileSystem();
+    run.decide();
   }
 
-  public void decide(){
-    System.out.println("NO");
+  // function that decides if missile should be launched
+  public boolean decide(){
+    cmv = cmv();
+    pum = pum();
+
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        lcm[i][j] = "ANDD";
+      }
+    }
+
+    for (int i = 0; i < 15; i++) {
+      if (fuv[i] == false) {
+        System.out.println("NO");
+        return false;
+      }
+    }
+    System.out.println("YES");
+    return true;
   }
 
-
+  // function that creates and returns pum
   public boolean[][] pum(){
     pum = new boolean[15][15];
     for(int i=0; i<15; i++){
@@ -73,8 +92,8 @@ double AREA2;
     return pum;
   }
 
-  public boolean[] cmv(){
-    boolean[] cmv = new boolean[15];
+  // function that creates cmv, every entry in cmv is the result from the corresponding lic
+  public boolean[] cmv(){  
     cmv[0]=lic0();
     cmv[1]=lic1();
     cmv[2]=lic2();
@@ -91,10 +110,10 @@ double AREA2;
     cmv[13]=lic13();
     cmv[14]=lic14();
 
-
     return cmv;
   }
 
+  // function that creates and returns fuv
   public boolean[] fuv(){
     boolean[] fuv = new boolean[15];
     return fuv;
@@ -362,7 +381,7 @@ double AREA2;
     for (int i = 0; i < (NUMPOINTS - A_PTS - B_PTS - 2); i++) {
       Point a = points[i];
       Point b = points[i + A_PTS + 1];
-      Point b = points[i + A_PTS + B_PTS + 2];
+      Point c = points[i + A_PTS + B_PTS + 2];
       if (!pointsInCircle(a, b, c, RADIUS1)) {
         first = true;
       }
@@ -407,7 +426,8 @@ double AREA2;
     return false; //TODO change to variable when function is ready
   }
 
-/*Function that determines if three points is in or on a circle with a given radius*/
+/*Function that determines if three points is in or on a circle with a given radius
+ https://www.mathopenref.com/trianglecircumcircle.html*/
   public boolean pointsInCircle(Point a, Point b, Point c, double radius){
     double lengthAB = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
     double lengthAC = Math.sqrt(Math.pow(a.x - c.x, 2) + Math.pow(a.y - c.y, 2));
