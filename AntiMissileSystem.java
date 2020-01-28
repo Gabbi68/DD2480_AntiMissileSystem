@@ -187,10 +187,23 @@ double AREA2;
     return false;
   }
 
+  /*Returns true if there exists at least one set of two data points,
+  (X[i],Y[i]) and (X[j],Y[j]), separeated by exactly G_PTS consecutive intervening
+  points, such that X[j]-X[i]<0 (i<j)*/
   public boolean lic11(){
-    return true; //TODO change to variable when function is ready
-
+    if(NUMPOINTS<3 || G_PTS<1 || G_PTS>NUMPOINTS-2){
+      return false;
+    }
+    for(int i=0; i< NUMPOINTS-G_PTS-1; i++){
+      Point a = points[i];
+      Point b = points[i+G_PTS+1];
+      if( (b.x-a.x) < 0){
+        return true;
+      }
+    }
+    return false;
   }
+
   public boolean lic12(){
     return true; //TODO change to variable when function is ready
 

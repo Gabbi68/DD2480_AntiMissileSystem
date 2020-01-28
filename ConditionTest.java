@@ -39,13 +39,86 @@ public class ConditionTest{
     testLic9AngelEqualsPiReturnFalse();
     */
     /*
-    ------------LIC 10 tests-------------*/
+    ------------LIC 10 tests-------------
     testLic10LargerAreaReturnTrue();
     testLic10EqualAreaReturnFalse();
     testLic10LargeTriangelReturnTrue();
     testLic10SecondTriangelLargerReturnTrue();
     testLic10TooFewPointsReturnFalse();
+    */
+    /*
+    -------------LIC 11 tests-------------
+    */
+    testLic11NegativeXReturnFalse();
+    testLic11NegativeXReturnTrue();
+    testLic11ReturnTrue();
+    testLic11TooFewPointsReturnFalse();
 
+  }
+  //-------------------LIC11 tests -------------------------
+  //test no set is true due to 0 !< 0 and double negation (-2--3=1), returns false
+  public void testLic11NegativeXReturnFalse(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-3.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(-2.0,2.0);
+    if(run.lic11()){
+      System.out.println("testLic11NegativeXReturnFalse = false");
+    }else{
+      System.out.println("testLic11NegativeXReturnFalse = true");
+    }
+  }
+  //test where a double negative gives a negative answer, returns true
+  public void testLic11NegativeXReturnTrue(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(0.0,0.0);
+    run.points[1]= new Point(-1.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(0.0,0.0);
+    run.points[4]= new Point(-2.0,2.0);
+    if(run.lic11()){
+      System.out.println("testLic11NegativeXReturnTrue = true");
+    }else{
+      System.out.println("testLic11NegativeXReturnTrue = false");
+    }
+  }
+
+  //test when first set is false but second is true, returns true
+  public void testLic11ReturnTrue(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 5;
+    run.points = new Point[5];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    run.points[3]= new Point(-2.0,0.0);
+    run.points[4]= new Point(0.0,2.0);
+    if(run.lic11()){
+      System.out.println("testLic11ReturnTrue = true");
+    }else{
+      System.out.println("testLic11XReturnTrue = false");
+    }
+  }
+
+  //test with too few points, return false
+  public void testLic11TooFewPointsReturnFalse(){
+    run.G_PTS=2;
+    run.NUMPOINTS = 3;
+    run.points = new Point[3];
+    run.points[0]= new Point(1.0,0.0);
+    run.points[1]= new Point(0.0,0.0);
+    run.points[2]= new Point(0.0,0.0);
+    if(run.lic11()){
+      System.out.println("testLic11TooFewPointsReturnFalse = false");
+    }else{
+      System.out.println("testLic11TooFewPointsReturnFalse = true");
+    }
   }
   //-------------------LIC10 tests -------------------------
   //test that the area of a triangel with vertices (-1,0), (1,0) and (0,1) is greater than 0.5, returns true
