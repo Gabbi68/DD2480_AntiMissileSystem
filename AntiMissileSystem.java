@@ -302,16 +302,87 @@ double AREA2;
   }
 
   public boolean lic12(){
-    return true; //TODO change to variable when function is ready
+    if (NUMPOINTS < 3 || (K_PTS + 2) > NUMPOINTS) {
+      return false;
+    }
+
+    boolean first = false;
+    boolean second = false;
+
+    for (int i = 0; i < (NUMPOINTS - K_PTS - 1); i++) {
+      Point a = points[i];
+      Point b = points[i + K_PTS + 1];
+      double length = Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+      if (length > LENGTH1) {
+        first = true;
+      }
+      if (length < LENGTH2) {
+        second = true;
+      }
+    }
+
+    if (first && second) {
+      return true;
+    }
+
+    return false; //TODO change to variable when function is ready
 
   }
+
   public boolean lic13(){
-    return true; //TODO change to variable when function is ready
+    if (NUMPOINTS < 5 || (A_PTS + B_PTS + 3) > NUMPOINTS) {
+      return false;
+    }
+
+    boolean first = false;
+    boolean second = false;
+
+    for (int i = 0; i < (NUMPOINTS - A_PTS - B_PTS - 2); i++) {
+      Point a = points[i];
+      Point b = points[i + A_PTS + 1];
+      Point b = points[i + A_PTS + B_PTS + 2];
+      if (!pointsInCircle(a, b, c, RADIUS1)) {
+        first = true;
+      }
+      if (pointsInCircle(a, b, c, RADIUS2)) {
+        second = true;
+      }
+    }
+
+    if (first && second) {
+      return true;
+    }
+
+    return false; //TODO change to variable when function is ready
 
   }
-  public boolean lic14(){
-    return true; //TODO change to variable when function is ready
 
+  public boolean lic14(){
+    if (NUMPOINTS < 5 || (E_PTS + F_PTS + 3) > NUMPOINTS) {
+      return false;
+    }
+
+    boolean first = false;
+    boolean second = false;
+
+    for (int i = 0; i < (NUMPOINTS - E_PTS - F_PTS - 2); i++) {
+      Point a = points[i];
+      Point b = points[i + E_PTS + 1];
+      Point c = points[i + E_PTS + F_PTS + 2];
+      double area = Math.abs(a.x*(b.y-c.y) + b.x*(c.y-a.y) + c.x*(a.y-b.y))/2;
+      if (area > AREA1) {
+        first = true;
+      }
+      if (area < AREA2) {
+        second = true;
+      }
+    }
+
+    if (first && second) {
+      return true;
+    }
+
+    return false; //TODO change to variable when function is ready
   }
 
 /*Function that determines if three points is in or on a circle with a given radius*/

@@ -564,6 +564,132 @@ public class ConditionTest{
     }
   }
 
+  public void testLic12ReturnTrue(){
+    // there exist points seperated by K_PTS farther than LENGTH1 and closer than LENGTH2
+    run.NUMPOINTS = 3;
+    run.K_PTS = 1;
+    run.LENGTH1 = 2;
+    run.LENGTH2 = 3;
+
+		run.points = new Point[5];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(6, 6);
+		run.points[2]= new Point(2, 2);
+
+		if (run.lic12()) {
+			System.out.println("testLic12ReturnTrue = true");
+		} else {
+			System.out.println("testLic12ReturnTrue = false");
+		}
+	}
+
+  public void testLic12ReturnFalse(){
+		// there do not exist points seperated by K_PTS farther than LENGTH1 and closer than LENGTH2
+    run.NUMPOINTS = 3;
+    run.K_PTS = 1;
+    run.LENGTH1 = 2;
+    run.LENGTH2 = 3;
+
+		run.points = new Point[5];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(0, 0);
+
+		if (run.lic12()) {
+			System.out.println("testLic12ReturnFalse = true");
+		} else {
+			System.out.println("testLic12ReturnFalse = false");
+		}
+	}
+
+  public void testLic13ReturnTrue(){
+		// there exist points seperated by A_PTS and B_PTS that lie outside a circle of RADIUS1 and inside a circle of RADIUS2
+    run.NUMPOINTS = 5;
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 1;
+    run.RADIUS2 = 3;
+
+		run.points = new Point[5];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(2, 0);
+    run.points[3]= new Point(0, 0);
+    run.points[4]= new Point(0, 2);
+
+		if (run.lic13()) {
+			System.out.println("testLic13ReturnTrue = true");
+		} else {
+			System.out.println("testLic13ReturnTrue = false");
+		}
+	}
+
+  public void testLic13ReturnFalse(){
+    // there do not exist points seperated by A_PTS and B_PTS that lie outside a circle of RADIUS1 and inside a circle of RADIUS2
+    run.NUMPOINTS = 5;
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.RADIUS1 = 1;
+    run.RADIUS2 = 3;
+
+		run.points = new Point[5];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(0, 0);
+    run.points[3]= new Point(0, 0);
+    run.points[4]= new Point(0, 0);
+
+		if (run.lic13()) {
+			System.out.println("testLic1ReturnFalse = true");
+		} else {
+			System.out.println("testLic1ReturnFalse = false");
+		}
+	}
+
+  public void testLic14ReturnTrue(){
+    // there exist points seperated by E_PTS and F_PTS that create a triangle with area greater than AREA1 and less than AREA2
+    run.NUMPOINTS = 5;
+    run.E_PTS = 1;
+    run.F_PTS = 1;
+    run.AREA1 = 1;
+    run.AREA2 = 3;
+
+		run.points = new Point[5];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(2, 0);
+    run.points[3]= new Point(0, 0);
+    run.points[4]= new Point(0, 2);
+
+		if (run.lic14()) {
+			System.out.println("testLic14ReturnTrue = true");
+		} else {
+			System.out.println("testLic14ReturnTrue = false");
+		}
+	}
+
+  public void testLic14ReturnTrue(){
+    // there exist points seperated by E_PTS and F_PTS that create a triangle with area greater than AREA1 and less than AREA2
+    run.NUMPOINTS = 5;
+    run.E_PTS = 1;
+    run.F_PTS = 1;
+    run.AREA1 = 1;
+    run.AREA2 = 3;
+
+		run.points = new Point[5];
+		run.points[0]= new Point(0, 0);
+		run.points[1]= new Point(0, 0);
+		run.points[2]= new Point(0, 0);
+    run.points[3]= new Point(0, 0);
+    run.points[4]= new Point(0, 0);
+
+		if (run.lic14()) {
+			System.out.println("testLic14ReturnFalse = true");
+		} else {
+			System.out.println("testLic14ReturnFalse = false");
+		}
+	}
+  
   //--------------LIC0-----------------
 	public void testLic0ReturnTrue(){
 		// points will be more than 1 apart
@@ -686,6 +812,4 @@ public class ConditionTest{
 			System.out.println("testLic3ReturnFalse = true");
 		}
 	}
-
-
 }
