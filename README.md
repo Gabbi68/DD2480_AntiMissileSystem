@@ -22,15 +22,14 @@ ConditionTest is the file that tests every function of the program.
 A class that defines a point in the cartesian map.
 
 ## Contributions
-*   T
-..*   Code skeleton: Martin, Nicolai & Stina
-..*   Testing: all
-..*   Documentation: all
-..*   README: Nicolai & Stina
-..*   LIC 0-3: Nicolai
-..*   LIC 4-7: Martin
-..*   LIC 8-11: Stina
-..*   LIC 12-14: Aditya
-..*   Decide(): Nicolai & Stina
-..*   Pum: Nicolai & Stina
-..*   Fuv: Martin
+*   Code skeleton: Martin, Nicolai & Stina
+*   Testing: all
+*   Documentation: all
+*   README: Nicolai & Stina
+*   LIC 0-3: Nicolai
+*   LIC 4-7: Martin
+*   LIC 8-11: Stina
+*   LIC 12-14: Aditya
+*   Decide(): Nicolai & Stina
+*   Pum: Nicolai & Stina
+*   Fuv: Martin
