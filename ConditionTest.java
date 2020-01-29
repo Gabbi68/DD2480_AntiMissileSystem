@@ -90,13 +90,148 @@ public class ConditionTest{
   testPUMAndFalse();*/
 
   /*-----------Test Decide-------------*/
-  //TestDecideFalse1();
-  //TestDecideTrue1();
+  TestDecideFalse1();
+  TestDecideTrue1();
   TestDecideFalseTooFewPointsForSomeLic();
+  TestDecideTrue1();
+  TestDecideFalse1();
+  TestDecideTrue2();
+  TestDecideFalse2();
 
   }
 
   //--------------Test Decide-----------
+
+  // should not fufill all lics, puv all true, lcm all ANDD, decide should output no
+  public void TestDecideFalse2() {
+    run.fuv = new boolean[15];
+    run.points = new Point[2];
+    run.points[0] = new Point(1, 1);
+    run.points[1] = new Point(1, 1);
+    run.NUMPOINTS = 2;
+    run.LENGTH1 = 10;
+    run.RADIUS1 = 10;
+    run.EPSILON = 0.1;
+    run.AREA1 = 2;
+    run.Q_PTS = 3;
+    run.QUADS = 3;
+    run.N_PTS = 3;
+    run.DIST = 1;
+    run.K_PTS = 2;
+    run.A_PTS = 1;
+    run.B_PTS = 1;
+    run.C_PTS = 1;
+    run.D_PTS = 1;
+    run.E_PTS = 1;
+    run.F_PTS = 1;
+    run.G_PTS = 1;
+    run.LENGTH2 = 10;
+    run.RADIUS2 = 10;
+    run.AREA2 = 10;
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ANDD";
+      }
+      run.puv[i]=true;
+    }
+    if(run.decide()){
+      System.out.println("TestDecideFalse2 = false");
+    }else{
+      System.out.println("TestDecideFalse2 = true");
+    }
+  }
+
+
+  // test decide with all lic:s being true, whole lcm being all ORR, whole pum being true, whole puv being true
+    public void TestDecideTrue2() {
+      run.fuv = new boolean[15];
+      run.points = new Point[52];
+      run.points[0] = new Point(-1, -1);
+      run.points[1] = new Point(4, 4);
+      run.points[2] = new Point(5, 6);
+      run.points[3] = new Point(2, 4);
+      run.points[4] = new Point(10, 10);
+      run.points[5] = new Point(3, 5);
+      run.points[6] = new Point(0, 0);
+      run.points[7] = new Point(1,4);
+      run.points[8] = new Point(2,2);
+      run.points[9] = new Point(20, 20);
+      run.points[10] = new Point(0, 0);
+      run.points[11] = new Point(2,2);
+      run.points[12] = new Point(10, 10);
+      run.points[13] = new Point(4,5);
+      run.points[14] = new Point(-10, -10);
+      run.points[15] = new Point(-2, 2);
+      run.points[16] = new Point(1,1);
+      run.points[17] = new Point(0,0);
+      run.points[18] = new Point(1,1);
+      run.points[19] = new Point(1, 2);
+      run.points[20] = new Point(-4, -4);
+      run.points[21] = new Point(0, 0);
+      run.points[22] = new Point(0, 0);
+      run.points[23] = new Point(0, 0);
+      run.points[24] = new Point(4, -4);
+      run.points[25] = new Point(10, 10);
+      run.points[26] = new Point(0,0);
+      run.points[27] = new Point(4, 4);
+      run.points[28] = new Point(1,1);
+      run.points[29] = new Point(0,0);
+      run.points[30] = new Point(0,0);
+      run.points[31] = new Point(10,10);
+      run.points[32] = new Point(1, 1);
+      run.points[33] = new Point(0, 0);
+      run.points[34] = new Point(20, 20);
+      run.points[35] = new Point(0, 0);
+      run.points[36] = new Point(-20, 20);
+      run.points[37] = new Point(0,0);
+      run.points[38] = new Point(0,0);
+      run.points[39] = new Point(0,0);
+      run.points[40] = new Point(0,0);
+      run.points[41] = new Point(0,0);
+      run.points[42] = new Point(1,1);
+      run.points[43] = new Point(0,0);
+      run.points[44] = new Point(10, 3);
+      run.points[45] = new Point(0,0);
+      run.points[46] = new Point(20, 30);
+      run.points[47] = new Point(0,0);
+      run.points[48] = new Point(0,0);
+      run.points[49] = new Point(0.1, 0.2);
+      run.points[50] = new Point(0,0);
+      run.points[51] = new Point(0.1, -0.2);
+      run.NUMPOINTS = 52;
+      run.LENGTH1 = 10;
+      run.RADIUS1 = 10;
+      run.EPSILON = 0.1;
+      run.AREA1 = 2;
+      run.Q_PTS = 2;
+      run.QUADS = 1;
+      run.N_PTS = 3;
+      run.DIST = 1;
+      run.K_PTS = 2;
+      run.A_PTS = 1;
+      run.B_PTS = 1;
+      run.C_PTS = 1;
+      run.D_PTS = 1;
+      run.E_PTS = 1;
+      run.F_PTS = 1;
+      run.G_PTS = 1;
+      run.LENGTH2 = 10;
+      run.RADIUS2 = 10;
+      run.AREA2 = 10;
+      for(int i=0; i<15; i++){
+        for(int j=0; j<15; j++){
+          run.lcm[i][j] = "ORR";
+        }
+        run.puv[i]=true;
+      }
+      if(run.decide()){
+        System.out.println("TestDecideTrue2 = true");
+      }else{
+        System.out.println("TestDecideTrue2 = false");
+      }
+
+    }
+
   //Tests that all the functions can handle a small amount of points.
   public void TestDecideFalseTooFewPointsForSomeLic(){
     run.points = new Point[2];
@@ -181,7 +316,7 @@ public class ConditionTest{
     run.lcm[4][5]="NOTUSED";
     run.lcm[5][4]="NOTUSED";
 
-    run.puv[5]=false;
+    run.puv[4]=false;
     run.puv[12]=false;
     run.puv[14]=false;
 
@@ -190,6 +325,8 @@ public class ConditionTest{
     }else{
       System.out.println("TestDecideTrue1 = false");
     }
+
+
 }
 
   //test that a function that commands all to be correct returns false when all lics are not correct.
@@ -1104,7 +1241,9 @@ public class ConditionTest{
 	}
 
     //--------------FUV-----------------
+    /* Comment out these to we can change in the main file- the tests still work
     public void testFUVLaunch(){
+
         run.pum = {{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
                 {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
                 {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
@@ -1167,6 +1306,8 @@ public class ConditionTest{
             }
         }
     }
+
+    */
 
     //--------------LIC4-----------------
 
@@ -1288,7 +1429,7 @@ public class ConditionTest{
 
     public void testLic7false(){
 
-        rrun.NUMPOINTS = 2;
+        run.NUMPOINTS = 2;
         run.points = new Point[2];
         run.points[0] = new Point(0.0,0.0);
         run.points[1] = new Point(1.0,1.0);
