@@ -383,9 +383,7 @@ double AREA2 = 2;
       }else {
         for(int g = 1; g < N_PTS; g++){
           Point p = consectuativePoints[g];
-          double numi = Math.abs((last.y - first.y) * p.x - (last.x - first.x) * p.y + last.x * first.y - last.y * first.x);
-          double denum = Math.sqrt(Math.pow(last.y - first.y,2) + Math.pow(last.x - last.y,2));
-          double dist = numi/denum;
+          double dist = (Math.abs((last.y - first.y) * p.x - (last.x - first.x) * p.y + last.x * first.y - last.y * first.x))/(Math.sqrt(Math.pow(last.y - first.y,2) + Math.pow(last.x - last.y,2))) ;
 
           if(dist > DIST){
             return true;
