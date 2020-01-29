@@ -928,225 +928,225 @@ public class ConditionTest{
 		}
 	}
 
-  //--------------FUV-----------------
-  public void testFUVLaunch(){
-    run.pum = {{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true}};
+    //--------------FUV-----------------
+    public void testFUVLaunch(){
+        run.pum = {{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true}};
 
-    run.puv = {true,false,true,true,false,true,true,false,true,true,true,false,true,true,true};
+        run.puv = {true,false,true,true,false,true,true,false,true,true,true,false,true,true,true};
 
-    run.setFuv();
+        run.setFuv();
 
-    for(int i = 0; i < 14; i++){
-      if(!run.fuv[i]){
-        no++;
-      }
-    }
+        for(int i = 0; i < 14; i++){
+            if(!run.fuv[i]){
+                no++;
+            }
+        }
 
-    if (no == 0){
-      System.out.println("Go for launch");
-    }
+        if (no == 0){
+            System.out.println("Go for launch");
+        }
 
-  }
-
-
-  public void testFUVAbort(){
-
-    run.pum = {{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
-            {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true}};
-
-    run.puv = {true,false,true,true,false,true,true,false,true,true,true,true,true,true,true};
-
-    run.setFuv();
-
-    for(int i = 0; i < 14; i++){
-      if(!run.fuv[i]){
-        System.out.println("One or more Final unlocking vector is false, No launch");
-        break;
-      }
-    }
-  }
-
-  //--------------LIC4-----------------
-
-  public void testLic4false(){
-
-    run.NUMPOINTS = 2;
-    run.points = new Point[2];
-    run.points[0]= new Point(0.0,0.0);
-    run.points[1]= new Point(2.0,0.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 2;
-    run.DIST = 1;
-
-    if(!run.lic4()){
-      System.out.println("test successful, expected result is false");
-    }else {
-      System.out.println("Test was unsuccessful expected result was false");
-    }
-  }
-  public void testLic4True(){
-    run.NUMPOINTS = 2;
-    run.points = new Point[2];
-    run.points[0]= new Point(0.0,0.0);
-    run.points[1]= new Point(2.0,0.0);
-    run.Q_PTS = 4;
-    run.QUADS = 4;
-    run.N_PTS = 2;
-    run.DIST = 1;
-
-    if(run.lic4()){
-      System.out.println("test successful, expected result is true");
-    }else {
-      System.out.println("Test was unsuccessful expected result was true");
     }
 
 
-  }
+    public void testFUVAbort(){
 
-  //--------------LIC5-----------------
+        run.pum = {{true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,false,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {false,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true},
+                {true,true,true,true,true,true,true,true,true,true,true,true,true,true,true}};
 
-  public void testLic5false(){
-    run.NUMPOINTS = 1;
-    run.points = new Point[1];
-    run.points[0]= new Point(3.0,0.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 2;
-    run.DIST = 1;
+        run.puv = {true,false,true,true,false,true,true,false,true,true,true,true,true,true,true};
 
+        run.setFuv();
 
-    if(!run.lic5()){
-      System.out.println("test successful, expected result is false");
-    }else {
-      System.out.println("Test was unsuccessful expected result was false");
+        for(int i = 0; i < 14; i++){
+            if(!run.fuv[i]){
+                System.out.println("One or more Final unlocking vector is false, No launch");
+                break;
+            }
+        }
     }
 
-  }
-  public void testLic5True(){
+    //--------------LIC4-----------------
 
-    run.NUMPOINTS = 2;
-    run.points = new Point[2];
-    run.points[0] = new Point(3.0,0.0);
-    run.points[1] = new Point(2.0,0.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 2;
-    run.DIST = 1;
+    public void testLic4false(){
 
+        run.NUMPOINTS = 2;
+        run.points = new Point[2];
+        run.points[0]= new Point(0.0,0.0);
+        run.points[1]= new Point(2.0,0.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 2;
+        run.DIST = 1;
 
-    if(run.lic5()){
-      System.out.println("test successful, expected result is true");
-    }else {
-      System.out.println("Test was unsuccessful expected result was true");
+        if(!run.lic4()){
+            System.out.println("test successful, expected result is false");
+        }else {
+            System.out.println("Test was unsuccessful expected result was false");
+        }
     }
-  }
+    public void testLic4True(){
+        run.NUMPOINTS = 2;
+        run.points = new Point[2];
+        run.points[0]= new Point(0.0,0.0);
+        run.points[1]= new Point(2.0,0.0);
+        run.Q_PTS = 4;
+        run.QUADS = 4;
+        run.N_PTS = 2;
+        run.DIST = 1;
 
-  //--------------LIC6-----------------
+        if(run.lic4()){
+            System.out.println("test successful, expected result is true");
+        }else {
+            System.out.println("Test was unsuccessful expected result was true");
+        }
 
-  public void testLic6false(){
-    run.NUMPOINTS = 2;
-    run.points = new Point[2];
-    run.points[0] = new Point(3.0,0.0);
-    run.points[1] = new Point(2.0,0.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 2;
-    run.DIST = 1;
 
-    if(!run.lic6()){
-      System.out.println("test successful, expected result is false");
-    }else {
-      System.out.println("Test was unsuccessful expected result was false");
-    }
-  }
-  public void testLic6True(){
-
-    run.NUMPOINTS = 3;
-    run.points = new Point[3];
-    run.points[0] = new Point(0.0,0.0);
-    run.points[1] = new Point(1.0,1.0);
-    run.points[2] = new Point(2.0,3.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 3;
-    run.DIST = 0;
-
-    if(run.lic6()){
-      System.out.println("test successful, expected result is true");
-    }else {
-      System.out.println("Test was unsuccessful expected result was true");
     }
 
+    //--------------LIC5-----------------
+
+    public void testLic5false(){
+        run.NUMPOINTS = 1;
+        run.points = new Point[1];
+        run.points[0]= new Point(3.0,0.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 2;
+        run.DIST = 1;
 
 
-  }
+        if(!run.lic5()){
+            System.out.println("test successful, expected result is false");
+        }else {
+            System.out.println("Test was unsuccessful expected result was false");
+        }
 
-  //--------------LIC7-----------------
+    }
+    public void testLic5True(){
 
-  public void testLic7false(){
+        run.NUMPOINTS = 2;
+        run.points = new Point[2];
+        run.points[0] = new Point(3.0,0.0);
+        run.points[1] = new Point(2.0,0.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 2;
+        run.DIST = 1;
 
-    rrun.NUMPOINTS = 2;
-    run.points = new Point[2];
-    run.points[0] = new Point(0.0,0.0);
-    run.points[1] = new Point(1.0,1.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 3;
-    run.DIST = 0;
 
-    if(!run.lic7()){
-      System.out.println("test successful, expected result is false");
-    }else {
-      System.out.println("Test was unsuccessful expected result was false");
+        if(run.lic5()){
+            System.out.println("test successful, expected result is true");
+        }else {
+            System.out.println("Test was unsuccessful expected result was true");
+        }
     }
 
-  }
-  public void testLic7True(){
+    //--------------LIC6-----------------
 
-    run.NUMPOINTS = 3;
-    run.points = new Point[3];
-    run.points[0] = new Point(0.0,0.0);
-    run.points[1] = new Point(1.0,1.0);
-    run.points[2] = new Point(2.0,3.0);
-    run.Q_PTS = 1;
-    run.QUADS = 4;
-    run.N_PTS = 3;
-    run.DIST = 0;
+    public void testLic6false(){
+        run.NUMPOINTS = 2;
+        run.points = new Point[2];
+        run.points[0] = new Point(3.0,0.0);
+        run.points[1] = new Point(2.0,0.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 2;
+        run.DIST = 1;
 
-    if(run.lic7()){
-      System.out.println("test successful, expected result is true");
-    }else {
-      System.out.println("Test was unsuccessful expected result was true");
+        if(!run.lic6()){
+            System.out.println("test successful, expected result is false");
+        }else {
+            System.out.println("Test was unsuccessful expected result was false");
+        }
+    }
+    public void testLic6True(){
+
+        run.NUMPOINTS = 3;
+        run.points = new Point[3];
+        run.points[0] = new Point(0.0,0.0);
+        run.points[1] = new Point(1.0,1.0);
+        run.points[2] = new Point(2.0,3.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 3;
+        run.DIST = 0;
+
+        if(run.lic6()){
+            System.out.println("test successful, expected result is true");
+        }else {
+            System.out.println("Test was unsuccessful expected result was true");
+        }
+
+
+
     }
 
-  }
+    //--------------LIC7-----------------
+
+    public void testLic7false(){
+
+        rrun.NUMPOINTS = 2;
+        run.points = new Point[2];
+        run.points[0] = new Point(0.0,0.0);
+        run.points[1] = new Point(1.0,1.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 3;
+        run.DIST = 0;
+
+        if(!run.lic7()){
+            System.out.println("test successful, expected result is false");
+        }else {
+            System.out.println("Test was unsuccessful expected result was false");
+        }
+
+    }
+    public void testLic7True(){
+
+        run.NUMPOINTS = 3;
+        run.points = new Point[3];
+        run.points[0] = new Point(0.0,0.0);
+        run.points[1] = new Point(1.0,1.0);
+        run.points[2] = new Point(2.0,3.0);
+        run.Q_PTS = 1;
+        run.QUADS = 4;
+        run.N_PTS = 3;
+        run.DIST = 0;
+
+        if(run.lic7()){
+            System.out.println("test successful, expected result is true");
+        }else {
+            System.out.println("Test was unsuccessful expected result was true");
+        }
+
+    }
 
 }
