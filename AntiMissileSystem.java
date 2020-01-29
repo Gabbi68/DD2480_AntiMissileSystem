@@ -20,6 +20,7 @@ Point[] points = {new Point(0, 1), new Point(1, 2), new Point(3, 4), new Point(3
 
 String[][] lcm = new String[15][15];
 
+
 int NUMPOINTS = points.length;
 double LENGTH1 = 1;
 double RADIUS1 = 1;
@@ -59,8 +60,10 @@ double AREA2 = 2;
       }
     }
 
+    fuv = setFuv();
+
     for (int i = 0; i < 15; i++) {
-      if (fuv[i] == false) {
+      if (!fuv[i]) {
         System.out.println("NO");
         return false;
       }
@@ -122,8 +125,6 @@ double AREA2 = 2;
   //Then the FUV[0] will be true.
   //Based on FUV decide() will return YES if all are true and NO if any FUV is false.
   public void setFuv(){
-
-
 
     for(int i = 0; i < 14; i++){
       if (!puv[i]){
@@ -267,8 +268,59 @@ double AREA2 = 2;
   
   public boolean lic4(){
 
-   
-    return true; //TODO change to variable when function is ready
+    if(2 < Q_PTS || Q_PTS > NUMPOINTS || QUADS < 1 || QUADS > 3){
+      return false;
+    }
+
+
+
+
+    for (int i = 0; i <= (NUMPOINTS-Q_PTS); i++) {
+      ArrayList<Point> consecPoints = new ArrayList<>();
+      for (int j = i; j < (Q_PTS+i); j++) {
+        consecPoints.add(points[j]);
+      }
+      boolean[] diffQuads = new boolean[4];
+      int nrInDiffQuads = 0;
+
+      for (int z = 0; z < consecPoints.toArray().length;) {
+
+        if (consecPoints.get(z).x >= 0){
+          if(consecPoints.get(z).y >= 0){
+            diffQuads[0] = true;
+
+          }else if (consecPoints.get(z).x == 0 && (consecPoints.get(z).y < 0){
+            diffQuads[2] = true;
+
+          }else {
+            diffQuads[3] = true;
+          }
+
+        }else {
+          if (consecPoints.get(z).y >= 0) {
+            diffQuads[1] = true;
+
+          }else {
+            diffQuads[2] = true;
+          }
+        }
+        z++;
+      }
+
+
+      for (int j = 0; j < diffQuads.length;) {
+        if (diffQuads[j]) {
+          nrInDiffQuads++;
+        }
+        if (nrInDiffQuads > QUADS) {
+          return true;
+        }
+        j++;
+      }
+    }
+
+    return false;
+
 
   }
 
@@ -277,21 +329,19 @@ double AREA2 = 2;
   //that X[j] - X[i] < 0. (where i = j-1) :issue #13
   
   public boolean lic5(){
-    Point point1,point2;
+    Point point1;
+    Point point2;
 
-    for(int i = 0; i < points.length-1;i++){
+    for(int i = 0; i < (points.length - 1);i++){
       point1 = points[i];
       point2 = points[i+1];
 
-      if(point1.x == point2.y-1){
+      if((point2.x - point1.x) < 0){
         return true;
       }
 
     }
     return false;
-
-    return true; //TODO change to variable when function is ready
-
   }
 
   //There exists at least one set of N PTS consecutive data points such that at least one of the
@@ -303,36 +353,38 @@ double AREA2 = 2;
 
   public boolean lic6(){
 
-    if (N_PTS < 3){
-      return true;
+    if (NUMPOINTS < 3){
+      return false;
     }
 
     for(int i = 0; i < (NUMPOINTS - N_PTS) +1; i++){
       Point[] consectuativePoints = new Point[N_PTS];
+      Point first, last;
+
 
       for(int j = 0; j < N_PTS; j++){
         consectuativePoints[j] = this.points[i+j];
       }
 
-      Point first = consectuativePoints[0];
-      Point last = consectuativePoints[N_PTS-1];
+      first = consectuativePoints[0];
+      last = consectuativePoints[N_PTS-1];
 
 
-      if(first.x == last.x && first.y == first.y){
-        for(int z = 0; z < (N_PTS-1); z++){
-          Point p = consectuativePoints[z];
-          double dist = Math.sqrt(Math.pow(p.y - first.y, 2) + Math.pow(p.x - first.x,2));
-          if(dist > DIST){
-            return true;
+      if(first.x == last.x){
+        if(first.y == last.y){
+          for(int z = 0; z < (N_PTS-1); z++){
+            Point p = consectuativePoints[z];
+            double dist = Math.sqrt(Math.pow(p.y - first.y, 2) + Math.pow(p.x - first.x,2));
+            if(dist > DIST){
+              return true;
+            }
           }
         }
       }else {
         for(int g = 1; g < N_PTS; g++){
           Point p = consectuativePoints[g];
-
           double numi = Math.abs((last.y - first.y) * p.x - (last.x - first.x) * p.y + last.x * first.y - last.y * first.x);
           double denum = Math.sqrt(Math.pow(last.y - first.y,2) + Math.pow(last.x - last.y,2));
-
           double dist = numi/denum;
 
           if(dist > DIST){
@@ -346,8 +398,6 @@ double AREA2 = 2;
     }
 
     return false;
-
-
   }
 
   //There exists at least one set of two data points separated by exactly K PTS consecutive intervening points that are a distance greater than the length, LENGTH1, apart. The condition
@@ -355,7 +405,6 @@ double AREA2 = 2;
   //1 ≤ K PTS ≤ (NUMPOINTS−2) :issue #18
 
   public boolean lic7(){
-
     if(NUMPOINTS < 3){
       return false;
     }else {
@@ -364,16 +413,16 @@ double AREA2 = 2;
         Point X = points[i];
         Point Y = points[i+1];
         double CIT = Math.sqrt(Math.pow((X.x - Y.x),2)+Math.pow((X.y-Y.y),2));
+
+
         if(CIT > LENGTH1){
           return true;
         }
+
         i++;
       }
       return false;
     }
-
-    return true; //TODO change to variable when function is ready
-
   }
 
   /*Returns true if there exists at least one set of three data points who are
