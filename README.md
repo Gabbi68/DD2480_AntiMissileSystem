@@ -15,6 +15,9 @@ The main file that implements the decide()-method.
 Input is NUMPOINTS, Points, Parameters, Logical Connector Matric (LCM) & Preliminary Unlocking Vector (PUV).
 Output is LAUNCH, Conditions Met Vector (CMV), Preliminary Unlocking Matrix (PUM) & Final Unlocking Vector (FUV).
 
+## Run
+Create AntiMissileSystem-object. Initilize all the input variables and call the decide function. Run AntiMissileSystem.decide(). See for example TestDecideFalse2() in ConditionTest.java.
+
 ### Test
 ConditionTest is the file that tests every function of the program.
 
