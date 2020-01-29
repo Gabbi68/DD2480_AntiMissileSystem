@@ -72,23 +72,198 @@ public class ConditionTest{
   */
 
   // LIC12 tests
-  testLic12ReturnTrue();
-  testLic12ReturnFalse();
-  
+  //testLic12ReturnTrue();
+  //testLic12ReturnFalse();
+
   // LIC13 tests
-  testLic13ReturnTrue();
-  testLic13ReturnFalse();
+  //testLic13ReturnTrue();
+  //testLic13ReturnFalse();
 
   // LIC14 tests
-  testLic14ReturnTrue();
-  testLic14ReturnTrue2();
+  //testLic14ReturnTrue();
+  //testLic14ReturnTrue2();
 
-  /*---------------PUM test---------*/
+  /*---------------PUM test---------
   testPUMTrue();
   testPUMTrueCmvAllFalse();
   testPUMFalse();
-  testPUMAndFalse();
+  testPUMAndFalse();*/
+
+  /*-----------Test Decide-------------*/
+  //TestDecideFalse1();
+  //TestDecideTrue1();
+  TestDecideFalseTooFewPointsForSomeLic();
+
   }
+
+  //--------------Test Decide-----------
+  //Tests that all the functions can handle a small amount of points.
+  public void TestDecideFalseTooFewPointsForSomeLic(){
+    run.points = new Point[2];
+    run.points[0] = new Point(0.0,0.0);
+    run.points[1] = new Point(8.0,0.0);
+    run.NUMPOINTS = 2;
+    run.LENGTH1 = 1;
+    run.RADIUS1 = 10;
+    run.EPSILON = 1;
+    run.AREA1 = 12;
+    run.Q_PTS = 1;
+    run.QUADS = 4;
+    run.DIST = 1;
+    run.N_PTS = 3;
+    run.K_PTS = 2;
+    run.A_PTS = 2;
+    run.B_PTS = 2;
+    run.C_PTS = 2;
+    run.D_PTS = 2;
+    run.E_PTS = 2;
+    run.F_PTS = 2;
+    run.G_PTS = 2;
+    run.LENGTH2 = 3;
+    run.RADIUS2 = 6;
+    run.AREA2 = 2;
+
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ORR";
+      }
+      run.puv[i]=true;
+    }
+
+    if(run.decide()){
+      System.out.println("TestDecideFalseTooFewPointsForSomeLic = false");
+    }else{
+      System.out.println("TestDecideFalseTooFewPointsForSomeLic = true");
+    }
+
+}
+  //Test that the function returns true when all the entries in puv than corresponds
+  //to a false lic is set to false
+  public void TestDecideTrue1(){
+    run.points = new Point[10];
+    run.points[0] = new Point(0.0,0.0);
+    run.points[1] = new Point(8.0,0.0);
+    run.points[2] = new Point(3.0,0.0);
+    run.points[3] = new Point(5.0,2.0);
+    run.points[4] = new Point(-1.0,-3.0);
+    run.points[5] = new Point(10.0,5.0);
+    run.points[6] = new Point(0.0,-5.0);
+    run.points[7] = new Point(2.0,4.0);
+    run.points[8] = new Point(24.0,1.0);
+    run.points[9] = new Point(0.0,7.0);
+    run.NUMPOINTS = 10;
+    run.LENGTH1 = 1;
+    run.RADIUS1 = 10;
+    run.EPSILON = 1;
+    run.AREA1 = 12;
+    run.Q_PTS = 1;
+    run.QUADS = 4;
+    run.DIST = 1;
+    run.N_PTS = 3;
+    run.K_PTS = 2;
+    run.A_PTS = 2;
+    run.B_PTS = 2;
+    run.C_PTS = 2;
+    run.D_PTS = 2;
+    run.E_PTS = 2;
+    run.F_PTS = 2;
+    run.G_PTS = 2;
+    run.LENGTH2 = 3;
+    run.RADIUS2 = 6;
+    run.AREA2 = 2;
+
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ORR";
+      }
+      run.puv[i]=true;
+    }
+    run.lcm[4][5]="NOTUSED";
+    run.lcm[5][4]="NOTUSED";
+
+    run.puv[5]=false;
+    run.puv[12]=false;
+    run.puv[14]=false;
+
+    if(run.decide()){
+      System.out.println("TestDecideTrue1 = true");
+    }else{
+      System.out.println("TestDecideTrue1 = false");
+    }
+}
+
+  //test that a function that commands all to be correct returns false when all lics are not correct.
+  public void TestDecideFalse1(){
+    run.points = new Point[10];
+    run.points[0] = new Point(0.0,0.0);
+    run.points[1] = new Point(8.0,0.0);
+    run.points[2] = new Point(3.0,0.0);
+    run.points[3] = new Point(5.0,2.0);
+    run.points[4] = new Point(-1.0,-3.0);
+    run.points[5] = new Point(10.0,5.0);
+    run.points[6] = new Point(0.0,-5.0);
+    run.points[7] = new Point(2.0,4.0);
+    run.points[8] = new Point(24.0,1.0);
+    run.points[9] = new Point(0.0,7.0);
+    run.NUMPOINTS = 10;
+    run.LENGTH1 = 1;
+    run.RADIUS1 = 10;
+    run.EPSILON = 1;
+    run.AREA1 = 12;
+    run.Q_PTS = 1;
+    run.QUADS = 4;
+    run.DIST = 1;
+    run.N_PTS = 3;
+    run.K_PTS = 2;
+    run.A_PTS = 2;
+    run.B_PTS = 2;
+    run.C_PTS = 2;
+    run.D_PTS = 2;
+    run.E_PTS = 2;
+    run.F_PTS = 2;
+    run.G_PTS = 2;
+    run.LENGTH2 = 3;
+    run.RADIUS2 = 6;
+    run.AREA2 = 2;
+
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        run.lcm[i][j] = "ANDD";
+      }
+      run.puv[i]=true;
+    }
+    run.puv[14]=false;
+
+    if(run.decide()){
+      System.out.println("TestDecideFalse1 = false");
+    }else{
+      System.out.println("TestDecideFalse1 = true");
+    }
+
+/*  See how every vector and matrix behaves
+    for(int j=0; j<15; j++){
+      System.out.println(run.cmv[j]);
+    }
+    System.out.println("\n");
+    for(int i=0; i<15; i++){
+      for(int j=0; j<15; j++){
+        System.out.println(run.pum[i][j]);
+      }
+    }
+
+    System.out.println("\n");
+    for(int j=0; j<15; j++){
+      System.out.println(run.fuv[j]);
+    }
+
+    System.out.println("\n");
+    for(int j=0; j<15; j++){
+      System.out.println(run.puv[j]);
+    }*/
+  }
+
+
+
   ///---------------PUM test---------
   //Pum contains only true, should output true
   public void testPUMTrue(){
@@ -804,7 +979,7 @@ public class ConditionTest{
 			System.out.println("testLic14ReturnFalse = false");
 		}
 	}
-  
+
   //--------------LIC0-----------------
 	public void testLic0ReturnTrue(){
 		// points will be more than 1 apart
