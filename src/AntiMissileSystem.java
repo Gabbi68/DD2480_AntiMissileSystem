@@ -7,40 +7,40 @@ public class AntiMissileSystem{
 
 //Global variables
 double PI = Math.PI;
-boolean[] lic = new boolean[15];
 
-
-boolean[] cmv = new boolean[15];
-
+boolean[] cmv;
+// preliminary unlocking vector
+boolean[] puv = new boolean[15];
+// preliminary unlocking matrix
 boolean[][] pum;
 // final unlocking vector
-boolean[] fuv = {true, true,true,true,true,true,true,true,true,true,true,true,true,true,true};// = fuv();
+boolean[] fuv;
 // array with numpoints
-Point[] points = {new Point(0, 1), new Point(1, 2), new Point(3, 4), new Point(3, 4), new Point(3, 8)};
+Point[] points;
 
 String[][] lcm = new String[15][15];
 
 
-int NUMPOINTS = points.length;
-double LENGTH1 = 1;
-double RADIUS1 = 1;
-double EPSILON = 1;
-double AREA1 = 1;
-int Q_PTS = 1;
-int QUADS = 4;
-double DIST = 1;
-int N_PTS = 3;
-int K_PTS = 2;
-int A_PTS = 2;
-int B_PTS = 2;
-int C_PTS = 2;
-int D_PTS = 2;
-int E_PTS = 2;
-int F_PTS = 2;
-int G_PTS = 2;
-double LENGTH2 = 3;
-double RADIUS2 = 4;
-double AREA2 = 2;
+int NUMPOINTS;
+double LENGTH1;
+double RADIUS1;
+double EPSILON;
+double AREA1;
+int Q_PTS;
+int QUADS;
+double DIST;
+int N_PTS;
+int K_PTS;
+int A_PTS;
+int B_PTS;
+int C_PTS;
+int D_PTS;
+int E_PTS;
+int F_PTS;
+int G_PTS;
+double LENGTH2;
+double RADIUS2;
+double AREA2;
 
 
 
@@ -51,16 +51,9 @@ double AREA2 = 2;
 
   // function that decides if missile should be launched
   public boolean decide(){
-    cmv = cmv();
-    pum = pum();
-
-    for (int i = 0; i < 15; i++) {
-      for (int j = 0; j < 15; j++) {
-        lcm[i][j] = "ANDD";
-      }
-    }
-
-    fuv = setFuv();
+    cmv();
+    pum();
+    setFuv();
 
     for (int i = 0; i < 15; i++) {
       if (!fuv[i]) {
@@ -73,7 +66,7 @@ double AREA2 = 2;
   }
 
   // function that creates and returns pum
-  public boolean[][] pum(){
+  public void pum(){
     pum = new boolean[15][15];
     for(int i=0; i<15; i++){
       for(int j=0; j<15; j++){
@@ -94,11 +87,11 @@ double AREA2 = 2;
         }
       }
     }
-    return pum;
   }
 
   // function that creates cmv, every entry in cmv is the result from the corresponding lic
-  public boolean[] cmv(){  
+  public void cmv(){
+    cmv = new boolean[15];
     cmv[0]=lic0();
     cmv[1]=lic1();
     cmv[2]=lic2();
@@ -115,7 +108,6 @@ double AREA2 = 2;
     cmv[13]=lic13();
     cmv[14]=lic14();
 
-    return cmv;
   }
 
 
@@ -125,13 +117,13 @@ double AREA2 = 2;
   //Then the FUV[0] will be true.
   //Based on FUV decide() will return YES if all are true and NO if any FUV is false.
   public void setFuv(){
-
-    for(int i = 0; i < 14; i++){
+    fuv = new boolean[15];
+    for(int i = 0; i < 15; i++){
       if (!puv[i]){
         fuv[i] = true;
       }else {
         int nrOfFalse = 0;
-        for(int j = 0; j < 14; j++){
+        for(int j = 0; j < 15; j++){
           if(!pum[i][j]){
             nrOfFalse++;
           }
@@ -258,14 +250,14 @@ double AREA2 = 2;
     return false;
   }
 
-  
+
     //There exists at least one set of Q PTS consecutive data points that lie in more than QUADS
   //quadrants. Where there is ambiguity as to which quadrant contains a given point, priority
   //of decision will be by quadrant number, i.e., I, II, III, IV. For example, the data point (0,0)
   //is in quadrant I, the point (-l,0) is in quadrant II, the point (0,-l) is in quadrant III, the point
   //(0,1) is in quadrant I and the point (1,0) is in quadrant I.
   //(2 ≤ Q PTS ≤ NUMPOINTS), (1 ≤ QUADS ≤ 3) :issue #12
-  
+
   public boolean lic4(){
 
     if(2 < Q_PTS || Q_PTS > NUMPOINTS || QUADS < 1 || QUADS > 3){
@@ -289,7 +281,7 @@ double AREA2 = 2;
           if(consecPoints.get(z).y >= 0){
             diffQuads[0] = true;
 
-          }else if (consecPoints.get(z).x == 0 && (consecPoints.get(z).y < 0){
+          }else if (consecPoints.get(z).x == 0 && (consecPoints.get(z).y < 0)){
             diffQuads[2] = true;
 
           }else {
@@ -327,7 +319,7 @@ double AREA2 = 2;
 
   //There exists at least one set of two consecutive data points, (X[i],Y[i]) and (X[j],Y[j]), such
   //that X[j] - X[i] < 0. (where i = j-1) :issue #13
-  
+
   public boolean lic5(){
     Point point1;
     Point point2;
@@ -541,7 +533,7 @@ double AREA2 = 2;
       return true;
     }
 
-    return false; //TODO change to variable when function is ready
+    return false;
 
   }
 
@@ -569,7 +561,7 @@ double AREA2 = 2;
       return true;
     }
 
-    return false; //TODO change to variable when function is ready
+    return false;
 
   }
 
@@ -598,7 +590,7 @@ double AREA2 = 2;
       return true;
     }
 
-    return false; //TODO change to variable when function is ready
+    return false; 
   }
 
 /*Function that determines if three points is in or on a circle with a given radius
